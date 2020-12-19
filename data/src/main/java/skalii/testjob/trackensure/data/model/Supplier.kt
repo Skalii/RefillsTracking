@@ -14,15 +14,15 @@ import skalii.testjob.trackensure.data.model.base.BaseModel
 
 
 @Entity(
-    tableName = "gas_stations",
+    tableName = "suppliers",
     indices = [Index(
         value = ["id"],
-        name = "gas_stations_pkey",
+        name = "suppliers_pkey",
         unique = true
     )]
 )
 @Serializable
-data class GasStation(
+data class Supplier(
 
     @ColumnInfo(name = "id")
     @NonNull
@@ -31,21 +31,12 @@ data class GasStation(
     override val id: Int,
 
     @ColumnInfo(
-        name = "title",
+        name = "name",
         collate = ColumnInfo.UNICODE,
-        defaultValue = "Unknown gas station"
+        defaultValue = "Unknown supplier"
     )
     @NonNull
-    @SerialName(value = "title")
-    var title: String = "Unknown gas station",
-
-    @ColumnInfo(
-        name = "geolocation",
-        collate = ColumnInfo.UNICODE,
-        defaultValue = "Unknown geolocation",
-    )
-    @NonNull
-    @SerialName(value = "geopoint")
-    var geopoint: Pair<Double, Double> = Pair(0.00, 0.00)
+    @SerialName(value = "name")
+    var name: String = "Unknown supplier"
 
 ) : BaseModel

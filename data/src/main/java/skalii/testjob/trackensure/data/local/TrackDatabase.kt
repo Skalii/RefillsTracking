@@ -11,23 +11,27 @@ import androidx.room.TypeConverters
 import kotlinx.serialization.ExperimentalSerializationApi
 
 import skalii.testjob.trackensure.data.local.converter.LocalDateTimeConverter
-import skalii.testjob.trackensure.data.local.dao.GasStationDao
-import skalii.testjob.trackensure.data.local.dao.RefillDao
-import skalii.testjob.trackensure.data.model.GasStation
-import skalii.testjob.trackensure.data.model.Refill
+import skalii.testjob.trackensure.data.local.converter.PairDoubleDoubleConverter
+import skalii.testjob.trackensure.data.local.dao.*
+import skalii.testjob.trackensure.data.model.*
+import skalii.testjob.trackensure.data.type.*
 
 
 @Database(
-    entities = [GasStation::class, Refill::class],
+    entities = [GasStation::class, Refill::class, Supplier::class],
     version = 1,
     exportSchema = false
 )
 @ExperimentalSerializationApi
-@TypeConverters(LocalDateTimeConverter::class)
+@TypeConverters(
+    LocalDateTimeConverter::class, PairDoubleDoubleConverter::class,
+    FuelType::class
+)
 abstract class TrackDatabase : RoomDatabase() {
 
     abstract fun getGasStationDao(): GasStationDao
     abstract fun getRefillDao(): RefillDao
+    abstract fun getSupplierDao(): SupplierDao
 
     companion object {
 

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_primary"
+    android:fitsSystemWindows="true"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".ui.activity.LoginActivity">
+
+    <ProgressBar
+        android:id="@+id/progress_bar_activity_login"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:visibility="gone" />
+
+    <EditText
+        android:id="@+id/edit_email_activity_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:hint="Email"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/color_text" />
+
+    <EditText
+        android:id="@+id/edit_password_activity_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:hint="Password"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        android:textColor="@color/color_text" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_login_activity_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/color_accent"
+        android:text="Login"
+        android:textColor="@color/color_primary"
+        app:rippleColor="@color/color_content_accent_transparent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_reset_password_activity_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/color_primary"
+        android:text="Forgot password"
+        android:textColor="@color/color_text"
+        app:rippleColor="@color/color_content_accent_transparent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_signup_activity_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/color_primary"
+        android:text="Go to signup"
+        android:textColor="@color/color_accent"
+        app:rippleColor="@color/color_content_accent_transparent" />
+
+</LinearLayout>

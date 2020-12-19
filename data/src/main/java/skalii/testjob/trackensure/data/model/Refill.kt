@@ -16,6 +16,7 @@ import kotlinx.serialization.Serializable
 
 import skalii.testjob.trackensure.data.local.converter.LocalDateSerializer
 import skalii.testjob.trackensure.data.model.base.BaseModel
+import skalii.testjob.trackensure.data.type.FuelType
 
 
 @Entity(
@@ -32,7 +33,15 @@ import skalii.testjob.trackensure.data.model.base.BaseModel
             childColumns = ["id_gas_station"],
             onDelete = ForeignKey.CASCADE,
             onUpdate = ForeignKey.CASCADE
-        )]
+        ),
+        ForeignKey(
+            entity = Supplier::class,
+            parentColumns = ["id"],
+            childColumns = ["id_supplier"],
+            onDelete = ForeignKey.CASCADE,
+            onUpdate = ForeignKey.CASCADE
+        )
+    ]
 )
 @ExperimentalSerializationApi
 @Serializable
@@ -58,10 +67,30 @@ data class Refill(
     @SerialName(value = "liter")
     var liter: Double = 0.00,
 
+    @ColumnInfo(
+        name = "fuel_type",
+        collate = ColumnInfo.UNICODE
+    )
+    @NonNull
+    @SerialName(value = "fuel_type")
+    var fuelType: FuelType,
+
     @ColumnInfo(name = "id_gas_station")
     @NonNull
     @SerialName(value = "id_gas_station")
 //    @Transient
     var idGasStation: Int,
 
-    ) : BaseModel
+    @ColumnInfo(name = "id_supplier")
+    @NonNull
+    @SerialName(value = "id_supplier")
+//    @Transient
+    var idSupplier: Int,
+
+    @ColumnInfo(name = "uid")
+    @NonNull
+    @SerialName(value = "uid")
+//    @Transient
+    var uid: String = "a0WgcHUYP7gRHQapRT8st3R5Cde2"
+
+) : BaseModel

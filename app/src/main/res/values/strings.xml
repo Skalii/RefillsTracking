@@ -1,3 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
 <resources>
-    <string name="app_name">Test job for TrackEnsure</string>
+
+    <!-- main -->
+    <string name="app_name">Test job for TrackEnsure (Skalii)</string>
+
+    <!--  tab  -->
+    <string name="tab_refill">Refills</string>
+    <string name="tab_statistic">Statistics</string>
+
+    <!-- item -->
+    <string name="item_refill">Refill</string>
+
 </resources>
