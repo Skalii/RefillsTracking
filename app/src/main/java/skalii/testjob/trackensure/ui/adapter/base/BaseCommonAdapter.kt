@@ -3,8 +3,8 @@ package skalii.testjob.trackensure.ui.adapter.base
 
 import androidx.recyclerview.widget.RecyclerView.Adapter
 
-import skalii.testjob.trackensure.model.base.BaseModel
-import skalii.testjob.trackensure.model.base.BaseModel.Companion.setData
+import skalii.testjob.trackensure.helper.model.base.BaseModel
+import skalii.testjob.trackensure.helper.model.base.BaseModel.Companion.setData
 
 
 abstract class BaseCommonAdapter : Adapter<BaseViewHolder>() {

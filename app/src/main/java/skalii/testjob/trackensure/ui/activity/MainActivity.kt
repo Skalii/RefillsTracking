@@ -55,6 +55,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         }
 
         setViewPager()
+
+        viewBinding.fabActivityMain.setOnClickListener {
+            startActivity(Intent(this, CreateRefillActivity::class.java))
+        }
+
     }
 
 

@@ -3,7 +3,7 @@ package skalii.testjob.trackensure.data.local.dao.base
 
 import androidx.lifecycle.LiveData
 
-import skalii.testjob.trackensure.data.model.base.BaseModel
+import skalii.testjob.trackensure.helper.model.base.BaseModel
 
 
 interface Dao<Model : BaseModel> {

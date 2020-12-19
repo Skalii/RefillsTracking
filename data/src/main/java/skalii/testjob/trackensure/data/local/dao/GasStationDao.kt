@@ -7,13 +7,14 @@ import androidx.room.RawQuery
 import androidx.sqlite.db.SupportSQLiteQuery
 
 import skalii.testjob.trackensure.data.local.dao.base.impl.BaseDao
-import skalii.testjob.trackensure.data.model.GasStation
+import skalii.testjob.trackensure.helper.model.GasStation
 
 
 @Dao
 abstract class GasStationDao : BaseDao<GasStation>() {
 
     override val orderBy: String = "order by title, geolocation"
+    override fun getTableName() = "gas_stations"
 
 
     @RawQuery(observedEntities = [GasStation::class])

@@ -10,11 +10,10 @@ import androidx.room.TypeConverters
 
 import kotlinx.serialization.ExperimentalSerializationApi
 
-import skalii.testjob.trackensure.data.local.converter.LocalDateTimeConverter
-import skalii.testjob.trackensure.data.local.converter.PairDoubleDoubleConverter
+import skalii.testjob.trackensure.data.local.converter.*
 import skalii.testjob.trackensure.data.local.dao.*
-import skalii.testjob.trackensure.data.model.*
-import skalii.testjob.trackensure.data.type.*
+import skalii.testjob.trackensure.helper.model.*
+import skalii.testjob.trackensure.helper.type.*
 
 
 @Database(

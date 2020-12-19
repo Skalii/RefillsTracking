@@ -5,7 +5,7 @@ import androidx.room.TypeConverter
 
 import java.time.LocalDateTime
 
-import skalii.testjob.trackensure.data.getDateTimeFormatter
+import skalii.testjob.trackensure.helper.getDateTimeFormatter
 import skalii.testjob.trackensure.data.local.converter.base.BaseConverter
 
 

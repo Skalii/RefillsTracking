@@ -1,4 +1,4 @@
-package skalii.testjob.trackensure.data.model
+package skalii.testjob.trackensure.helper.model
 
 
 import androidx.annotation.NonNull
@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-import skalii.testjob.trackensure.data.model.base.BaseModel
+import skalii.testjob.trackensure.helper.model.base.BaseModel
 
 
 @Entity(

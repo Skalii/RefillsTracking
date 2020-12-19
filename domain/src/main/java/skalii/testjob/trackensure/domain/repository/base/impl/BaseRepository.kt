@@ -11,7 +11,7 @@ import java.util.concurrent.Executors
 
 import skalii.testjob.trackensure.data.local.TrackDatabase
 import skalii.testjob.trackensure.data.local.dao.base.Dao
-import skalii.testjob.trackensure.data.model.base.BaseModel
+import skalii.testjob.trackensure.helper.model.base.BaseModel
 import skalii.testjob.trackensure.domain.repository.base.RepositoryLocal
 import skalii.testjob.trackensure.domain.repository.base.RepositoryRemote
 

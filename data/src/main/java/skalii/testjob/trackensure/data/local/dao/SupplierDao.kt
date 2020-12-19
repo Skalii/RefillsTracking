@@ -7,7 +7,7 @@ import androidx.room.RawQuery
 import androidx.sqlite.db.SupportSQLiteQuery
 
 import skalii.testjob.trackensure.data.local.dao.base.impl.BaseDao
-import skalii.testjob.trackensure.data.model.Supplier
+import skalii.testjob.trackensure.helper.model.Supplier
 
 
 @Dao

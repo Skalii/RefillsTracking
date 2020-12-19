@@ -9,17 +9,22 @@ import androidx.appcompat.app.AppCompatActivity
 import by.kirich1409.viewbindingdelegate.viewBinding
 
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.CoroutineName
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.plus
 
 import skalii.testjob.trackensure.R
 import skalii.testjob.trackensure.databinding.ActivityPasswordResetBinding
-import skalii.testjob.trackensure.setVisibility
-import skalii.testjob.trackensure.toast
+import skalii.testjob.trackensure.helper.setVisibility
+import skalii.testjob.trackensure.helper.toast
 
 
 class PasswordResetActivity : AppCompatActivity(R.layout.activity_password_reset) {
 
     private val viewBinding
             by viewBinding(ActivityPasswordResetBinding::bind, R.id.activity_password_reset)
+    private val mainLaunch = MainScope() + CoroutineName(this.javaClass.simpleName)
 
     private var auth: FirebaseAuth? = null
 
@@ -42,10 +47,12 @@ class PasswordResetActivity : AppCompatActivity(R.layout.activity_password_reset
             auth
                 ?.sendPasswordResetEmail(email)
                 ?.addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        toast("We have sent you instructions to reset your password!")
-                    } else {
-                        toast("Failed to send reset email!")
+                    mainLaunch.launch {
+                        if (task.isSuccessful) {
+                            toast("We have sent you instructions to reset your password!")
+                        } else {
+                            toast("Failed to send reset email!")
+                        }
                     }
                     progressBar.setVisibility(false)
                 }

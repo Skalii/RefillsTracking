@@ -18,8 +18,7 @@
         android:layout_gravity="center_horizontal|top"
         android:indeterminate="true"
         android:indeterminateTint="@color/color_primary_dark"
-        android:indeterminateTintMode="src_atop"
-        android:visibility="gone" />
+        android:indeterminateTintMode="src_atop" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_page_refill"

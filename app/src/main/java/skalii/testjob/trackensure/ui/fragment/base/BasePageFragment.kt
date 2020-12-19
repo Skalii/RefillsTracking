@@ -14,7 +14,9 @@ import androidx.paging.PagedList
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 
-import skalii.testjob.trackensure.model.base.BaseModel
+import kotlinx.coroutines.CoroutineScope
+
+import skalii.testjob.trackensure.helper.model.base.BaseModel
 import skalii.testjob.trackensure.ui.adapter.base.BaseCommonAdapter
 import skalii.testjob.trackensure.ui.adapter.base.BasePagedAdapter
 
@@ -23,6 +25,7 @@ abstract class BasePageFragment(@LayoutRes private val contentLayoutId: Int) :
     Fragment(contentLayoutId) {
 
     protected abstract val viewBinding: ViewBinding
+    protected abstract val mainLaunch: CoroutineScope
 
     protected val dataProgressionLiveData = MutableLiveData<MutableMap<String, Boolean>>()
 

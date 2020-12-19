@@ -1,4 +1,4 @@
-package skalii.testjob.trackensure.data.model
+package skalii.testjob.trackensure.helper.model
 
 
 import androidx.annotation.NonNull
@@ -14,9 +14,9 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-import skalii.testjob.trackensure.data.local.converter.LocalDateSerializer
-import skalii.testjob.trackensure.data.model.base.BaseModel
-import skalii.testjob.trackensure.data.type.FuelType
+import skalii.testjob.trackensure.helper.converter.LocalDateSerializer
+import skalii.testjob.trackensure.helper.model.base.BaseModel
+import skalii.testjob.trackensure.helper.type.FuelType
 
 
 @Entity(
@@ -66,6 +66,11 @@ data class Refill(
     @NonNull
     @SerialName(value = "liter")
     var liter: Double = 0.00,
+
+    @ColumnInfo(name = "cost")
+    @NonNull
+    @SerialName(value = "cost")
+    var cost: Double = 0.00,
 
     @ColumnInfo(
         name = "fuel_type",

@@ -4,8 +4,8 @@ package skalii.testjob.trackensure.ui.adapter.base
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 
-import skalii.testjob.trackensure.model.base.BaseModel
-import skalii.testjob.trackensure.model.base.BaseModel.Companion.setData
+import skalii.testjob.trackensure.helper.model.base.BaseModel
+import skalii.testjob.trackensure.helper.model.base.BaseModel.Companion.setData
 
 
 abstract class BasePagedAdapter<Model : BaseModel> :

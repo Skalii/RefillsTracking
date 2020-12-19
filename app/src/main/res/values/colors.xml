@@ -4,7 +4,7 @@
 
     <color name="color_primary">#fafafa</color>
     <color name="color_primary_dark">#707070</color>
-    <color name="color_accent">#00AEFF</color>
+    <color name="color_accent">#4C8EFF</color>
 
     <color name="color_content_accent">#4C7DFF</color>
     <color name="color_content_accent_slightly_transparent">#AB4C7DFF</color>

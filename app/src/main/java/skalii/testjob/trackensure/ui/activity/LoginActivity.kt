@@ -11,15 +11,21 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 
 import com.google.firebase.auth.FirebaseAuth
 
+import kotlinx.coroutines.CoroutineName
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.plus
+
 import skalii.testjob.trackensure.R
 import skalii.testjob.trackensure.databinding.ActivityLoginBinding
-import skalii.testjob.trackensure.setVisibility
-import skalii.testjob.trackensure.toast
+import skalii.testjob.trackensure.helper.setVisibility
+import skalii.testjob.trackensure.helper.toast
 
 
 class LoginActivity : AppCompatActivity(R.layout.activity_login) {
 
     private val viewBinding by viewBinding(ActivityLoginBinding::bind, R.id.activity_login)
+    private val mainLaunch = MainScope() + CoroutineName(this.javaClass.simpleName)
 
     private var auth: FirebaseAuth? = null
 
@@ -65,7 +71,7 @@ class LoginActivity : AppCompatActivity(R.layout.activity_login) {
                         if (password.length < 6) {
                             editPassword.error = "Password must be longer than 6 characters"
                         } else {
-                            toast("Auth failed")
+                            mainLaunch.launch { toast("Auth failed") }
                         }
                     } else {
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java))

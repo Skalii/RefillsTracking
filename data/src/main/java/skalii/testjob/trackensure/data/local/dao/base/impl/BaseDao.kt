@@ -15,7 +15,7 @@ import java.lang.reflect.ParameterizedType
 import java.util.Locale.ROOT
 
 import skalii.testjob.trackensure.data.local.dao.base.Dao
-import skalii.testjob.trackensure.data.model.base.BaseModel
+import skalii.testjob.trackensure.helper.model.base.BaseModel
 
 
 abstract class BaseDao<Model : BaseModel> : Dao<Model> {

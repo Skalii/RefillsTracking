@@ -11,15 +11,21 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 
 import com.google.firebase.auth.FirebaseAuth
 
+import kotlinx.coroutines.CoroutineName
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.plus
+
 import skalii.testjob.trackensure.R
 import skalii.testjob.trackensure.databinding.ActivitySignupBinding
-import skalii.testjob.trackensure.setVisibility
-import skalii.testjob.trackensure.toast
+import skalii.testjob.trackensure.helper.setVisibility
+import skalii.testjob.trackensure.helper.toast
 
 
 class SignupActivity : AppCompatActivity(R.layout.activity_signup) {
 
     private val viewBinding by viewBinding(ActivitySignupBinding::bind, R.id.activity_signup)
+    private val mainLaunch = MainScope() + CoroutineName(this.javaClass.simpleName)
 
     private var auth: FirebaseAuth? = null
 
@@ -59,10 +65,10 @@ class SignupActivity : AppCompatActivity(R.layout.activity_signup) {
             auth
                 ?.createUserWithEmailAndPassword(email, password)
                 ?.addOnCompleteListener(this@SignupActivity) { task ->
-                    toast("Create user with email completed")
+                    mainLaunch.launch { toast("Create user with email completed") }
                     progressBar.setVisibility(false)
                     if (!task.isSuccessful) {
-                        toast("Authentication failed." + task.exception)
+                        mainLaunch.launch { toast("Authentication failed." + task.exception) }
                     } else {
                         startActivity(Intent(this@SignupActivity, MainActivity::class.java))
                         finish()
