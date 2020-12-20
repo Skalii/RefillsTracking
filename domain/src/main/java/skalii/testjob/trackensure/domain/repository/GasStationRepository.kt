@@ -12,4 +12,8 @@ class GasStationRepository(context: Context) : BaseRepository<GasStation>(contex
 
     override val dao = trackDatabase.getGasStationDao()
 
+
+    fun loadSomeFinalLocal(title: String, geopoint: Pair<Double, Double>) =
+        dao.findSomeFinal(title, geopoint)
+
 }

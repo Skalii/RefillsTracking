@@ -70,14 +70,16 @@ class RefillPagedAdapter : BasePagedAdapter<Refill>() {
             gasStation: GasStation?,
             supplier: Supplier?
         ) {
-
             textGasStation.text = gasStation?.title
             textFuelSupplier.text = supplier?.name
             textDate.text = refill.date.format(getDateTimeFormatter())
             textFuelType.text = refill.fuelType.value
-            textLiter.text = refill.liter.toString()
-            textCost.text = refill.cost.toString()
+            textLiter.text = "${refill.liter} L"
+            textCost.text = "$${refill.cost}"
 
+            card.setOnClickListener {
+                //todo open refill for update
+            }
         }
 
     }

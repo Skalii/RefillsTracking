@@ -19,12 +19,12 @@ interface RepositoryLocal<Model : BaseModel> {
     fun loadAllLocal(): LiveData<List<Model>>
     fun loadAllFinalLocal(): List<Model>
 
-    fun saveLocal(record: Model)
-    fun saveLocal(records: List<Model>)
+    fun saveLocal(record: Model): Long
+    fun saveLocal(records: List<Model>): List<Long>
 
-    fun deleteLocal(id: Int)
-    fun deleteFewLocal(ids: List<Int>)
-    fun deleteLocal(record: Model)
-    fun deleteAllLocal(records: List<Model>)
+    fun deleteLocal(id: Int): Int
+    fun deleteFewLocal(ids: List<Int>): Int
+    fun deleteLocal(record: Model): Int
+    fun deleteAllLocal(records: List<Model>): Int
 
 }

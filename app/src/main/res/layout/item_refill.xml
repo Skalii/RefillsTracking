@@ -26,8 +26,8 @@
             style="@style/Text.Item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@id/text_fuel_type_item_refill"
-            app:layout_constraintEnd_toStartOf="@id/text_fuel_supplier_item_refill"
+            app:layout_constraintBottom_toTopOf="@id/text_fuel_supplier_item_refill"
+            app:layout_constraintEnd_toStartOf="@id/text_date_item_refill"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,12 +40,12 @@
             style="@style/Text.Item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            app:layout_constraintBottom_toTopOf="@id/text_fuel_type_item_refill"
+            android:layout_marginTop="2dp"
+            app:layout_constraintBottom_toTopOf="@id/barrier_gas_station_item_refill"
             app:layout_constraintEnd_toStartOf="@id/text_date_item_refill"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintStart_toEndOf="@id/text_gas_station_item_refill"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_gas_station_item_refill"
             app:layout_constraintVertical_chainStyle="packed"
             tools:text="@tools:sample/cities" />
 
@@ -61,11 +61,11 @@
             style="@style/Text.Clarify"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@id/text_liter_item_refill"
+            app:layout_constraintBottom_toBottomOf="@id/text_fuel_supplier_item_refill"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1"
             app:layout_constraintStart_toEndOf="@id/barrier_supplier_item_refill"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@id/text_gas_station_item_refill"
             tools:text="@tools:sample/date/ddmmyy" />
 
         <androidx.constraintlayout.widget.Barrier
@@ -73,33 +73,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="text_gas_station_item_refill,text_date_item_refill" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/text_fuel_type_item_refill"
-            style="@style/Text.Item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/text_liter_item_refill"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/barrier_gas_station_item_refill"
-            tools:text="0.00l" />
+            app:constraint_referenced_ids="text_gas_station_item_refill,text_date_item_refill,text_date_item_refill" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_liter_item_refill"
             style="@style/Text.Item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/text_cost_item_refill"
-            app:layout_constraintStart_toEndOf="@id/text_fuel_type_item_refill"
+            app:layout_constraintEnd_toStartOf="@id/text_fuel_type_item_refill"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/barrier_gas_station_item_refill"
+            tools:text="0.00 L" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text_fuel_type_item_refill"
+            style="@style/Text.Item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            app:layout_constraintBottom_toBottomOf="@id/text_liter_item_refill"
+            app:layout_constraintEnd_toStartOf="@id/barrier_fuel_item_refill"
+            app:layout_constraintStart_toEndOf="@id/text_liter_item_refill"
+            app:layout_constraintTop_toTopOf="@id/text_liter_item_refill"
             tools:text="@tools:sample/lorem" />
 
         <androidx.constraintlayout.widget.Barrier
@@ -107,20 +106,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="end"
-            app:constraint_referenced_ids="text_fuel_type_item_refill,text_liter_item_refill" />
+            app:constraint_referenced_ids="text_liter_item_refill,text_fuel_type_item_refill" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_cost_item_refill"
             style="@style/Text.Item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/text_liter_item_refill"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1"
             app:layout_constraintStart_toEndOf="@id/barrier_fuel_item_refill"
-            app:layout_constraintTop_toBottomOf="@id/barrier_gas_station_item_refill"
-            tools:text="0$" />
+            app:layout_constraintTop_toTopOf="@id/text_liter_item_refill"
+            tools:text="$0.00" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -19,16 +19,14 @@ import skalii.testjob.trackensure.helper.model.base.BaseModel
         value = ["id"],
         name = "gas_stations_pkey",
         unique = true
+    ), Index(
+        value = ["title"],
+        name = "gas_stations_title_uindex",
+        unique = true
     )]
 )
 @Serializable
 data class GasStation(
-
-    @ColumnInfo(name = "id")
-    @NonNull
-    @PrimaryKey(autoGenerate = true)
-    @SerialName(value = "id")
-    override val id: Int,
 
     @ColumnInfo(
         name = "title",
@@ -40,7 +38,7 @@ data class GasStation(
     var title: String = "Unknown gas station",
 
     @ColumnInfo(
-        name = "geolocation",
+        name = "geolocation", //todo geopoint
         collate = ColumnInfo.UNICODE,
         defaultValue = "Unknown geolocation",
     )
@@ -48,4 +46,25 @@ data class GasStation(
     @SerialName(value = "geopoint")
     var geopoint: Pair<Double, Double> = Pair(0.00, 0.00)
 
-) : BaseModel
+) : BaseModel {
+
+    @ColumnInfo(name = "id")
+    @NonNull
+    @PrimaryKey(autoGenerate = true)
+    @SerialName(value = "id")
+    override var id = 0
+
+
+    constructor(
+        id: Int,
+        title: String = "Unknown gas station",
+        geopoint: Pair<Double, Double> = Pair(0.00, 0.00)
+    ) : this(title, geopoint) {
+        this.id = id
+    }
+
+
+    override fun toString() =
+        "GasStation(id=$id, title=$title, geopoint=$geopoint)"
+
+}

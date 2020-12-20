@@ -17,9 +17,10 @@ interface ViewModelLocal<Model : BaseModel> {
     fun getLocal(all: Boolean = false, vararg ids: Int? = emptyArray()): LiveData<List<Model>>
     fun getFinalLocal(all: Boolean = false, vararg ids: Int? = emptyArray()): List<Model>
 
-    fun saveLocal(vararg data: Model?)
+    fun saveLocal(data: Model?): Long
+    fun saveLocal(vararg data: Model?): List<Long>
 
-    fun removeLocal(vararg ids: Int?)
-    fun removeLocal(vararg data: Model?)
+    fun removeLocal(vararg ids: Int?): Int
+    fun removeLocal(vararg data: Model?): Int
 
 }

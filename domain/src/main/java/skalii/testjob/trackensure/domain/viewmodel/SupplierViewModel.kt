@@ -12,8 +12,13 @@ class SupplierViewModel : BaseViewModel<Supplier>() {
 
     override lateinit var repository: SupplierRepository
 
+
     fun init(context: Context) {
         repository = SupplierRepository(context)
     }
+
+
+    fun getFinalLocal(name: String) =
+        repository.loadSomeFinalLocal(name)
 
 }

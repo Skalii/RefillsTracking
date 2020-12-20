@@ -12,8 +12,13 @@ class GasStationViewModel : BaseViewModel<GasStation>() {
 
     override lateinit var repository: GasStationRepository
 
+
     fun init(context: Context) {
         repository = GasStationRepository(context)
     }
+
+
+    fun getFinalLocal(title: String, geopoint: Pair<Double, Double>) =
+        repository.loadSomeFinalLocal(title, geopoint)
 
 }

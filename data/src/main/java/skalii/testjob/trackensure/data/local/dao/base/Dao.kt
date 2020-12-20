@@ -19,8 +19,8 @@ interface Dao<Model : BaseModel> {
     fun findAll(): LiveData<List<Model>>
     fun findAllFinal(): List<Model>
 
-    fun save(record: Model)
-    fun save(records: List<Model>)
+    fun save(record: Model): Long
+    fun save(records: List<Model>): List<Long>
 
     fun delete(id: Int): Int
     fun deleteFew(ids: List<Int>): Int

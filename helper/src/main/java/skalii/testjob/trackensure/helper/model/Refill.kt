@@ -47,12 +47,6 @@ import skalii.testjob.trackensure.helper.type.FuelType
 @Serializable
 data class Refill(
 
-    @ColumnInfo(name = "id")
-    @NonNull
-    @PrimaryKey(autoGenerate = true)
-    @SerialName(value = "id")
-    override val id: Int,
-
     @ColumnInfo(
         name = "date",
         defaultValue = "(datetime('now'))"
@@ -84,13 +78,13 @@ data class Refill(
     @NonNull
     @SerialName(value = "id_gas_station")
 //    @Transient
-    var idGasStation: Int,
+    var idGasStation: Int = 0,
 
     @ColumnInfo(name = "id_supplier")
     @NonNull
     @SerialName(value = "id_supplier")
 //    @Transient
-    var idSupplier: Int,
+    var idSupplier: Int = 0,
 
     @ColumnInfo(name = "uid")
     @NonNull
@@ -98,4 +92,31 @@ data class Refill(
 //    @Transient
     var uid: String = "a0WgcHUYP7gRHQapRT8st3R5Cde2"
 
-) : BaseModel
+) : BaseModel {
+
+    @ColumnInfo(name = "id")
+    @NonNull
+    @PrimaryKey(autoGenerate = true)
+    @SerialName(value = "id")
+    override var id: Int = 0
+
+
+    constructor(
+        id: Int,
+        date: LocalDateTime = LocalDateTime.now(),
+        liter: Double = 0.00,
+        cost: Double = 0.00,
+        fuelType: FuelType,
+        idGasStation: Int = 0,
+        idSupplier: Int = 0,
+        uid: String = "a0WgcHUYP7gRHQapRT8st3R5Cde2"
+    ) : this(date, liter, cost, fuelType, idGasStation, idSupplier, uid) {
+        this.id = id
+    }
+
+
+    override fun toString() =
+        """Refill(id=$id, date=$date, liter=$liter, cost=$cost, fuelType=$fuelType, 
+            |idGasStation=$idGasStation, idSupplier=$idSupplier, uid=$uid)""".trimMargin()
+
+}

@@ -92,15 +92,14 @@ abstract class BaseDao<Model : BaseModel> : Dao<Model> {
     protected abstract fun update(records: List<Model>)
 
     @Transaction
-    override fun save(record: Model) {
-        if (insert(record) == -1L) update(record)
-    }
+    override fun save(record: Model) =
+        insert(record).also { if (it == -1L) update(record) }
 
     @Transaction
-    override fun save(records: List<Model>) {
-        val insertIds = insert(records).filterNot { it == -1L }
-        update(records.filterNot { it.id.toLong() in insertIds })
-    }
+    override fun save(records: List<Model>) =
+        insert(records).filterNot { it == -1L }.also { insertIds ->
+            update(records.filterNot { fn -> fn.id.toLong() in insertIds })
+        }
 
 
     override fun delete(id: Int) =

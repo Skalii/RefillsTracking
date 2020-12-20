@@ -18,5 +18,6 @@
 
     <color name="color_text">#1E1E1E</color>
     <color name="color_text_extra">#232323</color>
+    <color name="color_text_slightly_transparent">#AB1E1E1E</color>
 
 </resources>

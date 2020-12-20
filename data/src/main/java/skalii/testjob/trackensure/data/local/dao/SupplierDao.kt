@@ -3,6 +3,7 @@ package skalii.testjob.trackensure.data.local.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Query
 import androidx.room.RawQuery
 import androidx.sqlite.db.SupportSQLiteQuery
 
@@ -21,5 +22,16 @@ abstract class SupplierDao : BaseDao<Supplier>() {
 
     @RawQuery(observedEntities = [Supplier::class])
     abstract override fun findSomeLiveData(query: SupportSQLiteQuery): LiveData<List<Supplier>>
+
+
+    @Query(
+        """
+           select *
+           from suppliers
+           where name = :name
+           order by name;
+           """
+    )
+    abstract fun findSomeFinal(name: String): List<Supplier>
 
 }

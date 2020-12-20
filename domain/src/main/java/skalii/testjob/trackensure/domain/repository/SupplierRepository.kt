@@ -12,4 +12,8 @@ class SupplierRepository(context: Context) : BaseRepository<Supplier>(context) {
 
     override val dao = trackDatabase.getSupplierDao()
 
+
+    fun loadSomeFinalLocal(name: String) =
+        dao.findSomeFinal(name)
+
 }

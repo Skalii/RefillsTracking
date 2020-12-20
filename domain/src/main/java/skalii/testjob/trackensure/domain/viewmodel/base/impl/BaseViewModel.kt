@@ -38,17 +38,18 @@ abstract class BaseViewModel<Model : BaseModel> :
         }
 
 
-    override fun saveLocal(vararg data: Model?) {
+    override fun saveLocal(data: Model?) =
+        if (data != null) repository.saveLocal(data) else 0L
+
+    override fun saveLocal(vararg data: Model?) =
         if (!data.isNullOrEmpty()) repository.saveLocal(data.filterNotNull())
-    }
+        else emptyList()
 
 
-    override fun removeLocal(vararg ids: Int?) {
-        if (!ids.isNullOrEmpty()) repository.deleteFewLocal(ids.filterNotNull())
-    }
+    override fun removeLocal(vararg ids: Int?) =
+        if (!ids.isNullOrEmpty()) repository.deleteFewLocal(ids.filterNotNull()) else 0
 
-    override fun removeLocal(vararg data: Model?) {
-        if (!data.isNullOrEmpty()) repository.deleteAllLocal(data.filterNotNull())
-    }
+    override fun removeLocal(vararg data: Model?) =
+        if (!data.isNullOrEmpty()) repository.deleteAllLocal(data.filterNotNull()) else 0
 
 }

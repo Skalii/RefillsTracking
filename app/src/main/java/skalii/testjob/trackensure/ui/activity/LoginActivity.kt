@@ -2,10 +2,13 @@ package skalii.testjob.trackensure.ui.activity
 
 
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.TextUtils
 
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.res.ResourcesCompat
 
 import by.kirich1409.viewbindingdelegate.viewBinding
 
@@ -32,6 +35,10 @@ class LoginActivity : AppCompatActivity(R.layout.activity_login) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        supportActionBar?.setBackgroundDrawable(
+            ColorDrawable(ResourcesCompat.getColor(resources, R.color.color_accent, null))
+        )
 
         val editEmail = viewBinding.editEmailActivityLogin
         val editPassword = viewBinding.editPasswordActivityLogin

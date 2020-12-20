@@ -6,7 +6,7 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 
-import java.util.concurrent.Executor
+import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 import skalii.testjob.trackensure.data.local.TrackDatabase
@@ -22,14 +22,13 @@ abstract class BaseRepository<Model : BaseModel>(context: Context) :
     @Suppress("EXPERIMENTAL_API_USAGE")
     protected val trackDatabase = TrackDatabase.getInstance(context)
     protected abstract val dao: Dao<Model>
-    protected val executor: Executor = Executors.newSingleThreadExecutor()
+    protected val executor: ExecutorService = Executors.newSingleThreadExecutor()
 
 
     val loadAnyDataFromLocal: (() -> LiveData<*>) -> LiveData<*> =
         { Transformations.distinctUntilChanged(it()) }
-    val saveAnyDataToLocal: (() -> Unit) -> Unit = { executor.execute { it() } }
-    val deleteAnyDataFromLocal: (deleteLocal: () -> Unit) -> Unit = { executor.execute { it() } }
-
+    val saveAnyDataToLocal: (() -> Any) -> Any = { executor.submit(it).get() }
+    val deleteAnyDataFromLocal: (deleteLocal: () -> Int) -> Int = { executor.submit(it).get() }
 
     override fun getModelClass() = dao.getModelClass()
     override fun getModelName() = dao.getModelName()
@@ -58,8 +57,12 @@ abstract class BaseRepository<Model : BaseModel>(context: Context) :
         dao.findAllFinal()
 
 
-    override fun saveLocal(record: Model) = saveAnyDataToLocal { dao.save(record) }
-    override fun saveLocal(records: List<Model>) = saveAnyDataToLocal { dao.save(records) }
+    override fun saveLocal(record: Model) = saveAnyDataToLocal { dao.save(record) } as Long
+
+    @Suppress("UNCHECKED_CAST")
+    override fun saveLocal(records: List<Model>) =
+        saveAnyDataToLocal { dao.save(records) } as List<Long>
+
 
     override fun deleteLocal(id: Int) = deleteAnyDataFromLocal { dao.delete(id) }
     override fun deleteFewLocal(ids: List<Int>) = deleteAnyDataFromLocal { dao.deleteFew(ids) }
@@ -67,5 +70,14 @@ abstract class BaseRepository<Model : BaseModel>(context: Context) :
     override fun deleteLocal(record: Model) = deleteAnyDataFromLocal { dao.delete(record) }
     override fun deleteAllLocal(records: List<Model>) =
         deleteAnyDataFromLocal { dao.deleteAll(records) }
+
+
+    override fun runSync(record: Model?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun runSync(records: List<Model>?) {
+        TODO("Not yet implemented")
+    }
 
 }

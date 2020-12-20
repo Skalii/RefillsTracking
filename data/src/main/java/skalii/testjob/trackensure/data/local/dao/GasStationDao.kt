@@ -3,6 +3,7 @@ package skalii.testjob.trackensure.data.local.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Query
 import androidx.room.RawQuery
 import androidx.sqlite.db.SupportSQLiteQuery
 
@@ -22,5 +23,17 @@ abstract class GasStationDao : BaseDao<GasStation>() {
 
     @RawQuery(observedEntities = [GasStation::class])
     abstract override fun findSomeLiveData(query: SupportSQLiteQuery): LiveData<List<GasStation>>
+
+
+    @Query(
+        """
+           select *
+           from gas_stations
+           where title = :title
+             and geolocation = :geopoint
+           order by title, geolocation;
+           """
+    )
+    abstract fun findSomeFinal(title: String, geopoint: Pair<Double, Double>): List<GasStation>
 
 }

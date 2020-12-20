@@ -30,6 +30,10 @@
         <activity android:name=".ui.activity.SignupActivity" />
         <activity android:name=".ui.activity.PasswordResetActivity" />
 
+        <service
+            android:name=".service.ModelsSaverService"
+            android:enabled="true" />
+
     </application>
 
 </manifest>
