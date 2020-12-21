@@ -18,14 +18,13 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
+import java.io.IOException
+import java.time.format.DateTimeFormatter
+
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-
-import java.io.IOException
-
-import java.time.format.DateTimeFormatter
 
 
 fun Activity.isPermissionGranted(permission: String) =
@@ -112,11 +111,9 @@ fun SwipeRefreshLayout.swipeToRefresh(
                         errorMessage = e.message
                         false
                     }
-//                    GlobalScope.launch(Dispatchers.Main) {
                     if (isConnected) swipeCount++
                     coroutineScope?.launch { context.toast(errorMessage ?: "Дані оновлено") }
                     isRefreshing = false
-//                    }
                 }
             }
 

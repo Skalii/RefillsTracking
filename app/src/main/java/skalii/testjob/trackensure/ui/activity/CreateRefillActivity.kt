@@ -162,6 +162,7 @@ class CreateRefillActivity :
             }
 
             startService(intent)
+            finish()
         }
 
     }

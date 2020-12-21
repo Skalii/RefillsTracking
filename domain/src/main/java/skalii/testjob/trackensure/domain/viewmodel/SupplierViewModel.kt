@@ -21,4 +21,7 @@ class SupplierViewModel : BaseViewModel<Supplier>() {
     fun getFinalLocal(name: String) =
         repository.loadSomeFinalLocal(name)
 
+
+    override var getId: (Supplier) -> Int = { getFinalLocal(it.name)[0].id }
+
 }

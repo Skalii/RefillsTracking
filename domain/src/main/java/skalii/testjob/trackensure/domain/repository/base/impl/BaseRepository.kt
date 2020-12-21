@@ -11,6 +11,7 @@ import java.util.concurrent.Executors
 
 import skalii.testjob.trackensure.data.local.TrackDatabase
 import skalii.testjob.trackensure.data.local.dao.base.Dao
+import skalii.testjob.trackensure.data.remote.base.impl.BaseCollection
 import skalii.testjob.trackensure.helper.model.base.BaseModel
 import skalii.testjob.trackensure.domain.repository.base.RepositoryLocal
 import skalii.testjob.trackensure.domain.repository.base.RepositoryRemote
@@ -20,9 +21,11 @@ abstract class BaseRepository<Model : BaseModel>(context: Context) :
     RepositoryLocal<Model>, RepositoryRemote<Model> {
 
     @Suppress("EXPERIMENTAL_API_USAGE")
-    protected val trackDatabase = TrackDatabase.getInstance(context)
+    protected val localDatabase = TrackDatabase.getInstance(context)
     protected abstract val dao: Dao<Model>
     protected val executor: ExecutorService = Executors.newSingleThreadExecutor()
+
+    protected abstract val remoteDatabase: BaseCollection<Model>
 
 
     val loadAnyDataFromLocal: (() -> LiveData<*>) -> LiveData<*> =
@@ -72,12 +75,33 @@ abstract class BaseRepository<Model : BaseModel>(context: Context) :
         deleteAnyDataFromLocal { dao.deleteAll(records) }
 
 
-    override fun runSync(record: Model?) {
-        TODO("Not yet implemented")
-    }
+    override fun loadRemote(
+        field: String,
+        value: Any?,
+        runOnSuccess: (List<Model>) -> Unit,
+        runOnFailure: () -> Unit
+    ) =
+        remoteDatabase.find(field, value, runOnSuccess, runOnFailure)
 
-    override fun runSync(records: List<Model>?) {
-        TODO("Not yet implemented")
-    }
+    override fun loadRemote(
+        runOnSuccess: (List<Model>) -> Unit,
+        runOnFailure: () -> Unit
+    ) =
+        remoteDatabase.findAll(runOnSuccess, runOnFailure)
+
+
+    override fun saveRemote(
+        model: Model,
+        runOnSuccess: (Model) -> Unit,
+        runOnFailure: () -> Unit
+    ) =
+        remoteDatabase.add(model, runOnSuccess, runOnFailure)
+
+    override fun deleteRemote(
+        id: Int,
+        runOnSuccess: (List<Model>) -> Unit,
+        runOnFailure: () -> Unit
+    ) =
+        remoteDatabase.delete(id, runOnSuccess, runOnFailure)
 
 }

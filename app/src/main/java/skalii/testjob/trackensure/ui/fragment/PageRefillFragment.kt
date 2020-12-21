@@ -132,7 +132,7 @@ class PageRefillFragment : BasePageFragment(R.layout.page_refill) {
         dataProgressionLiveData.observe(viewLifecycleOwner, { list ->
 
             list.forEach {
-                logNav("dataProgressionLiveData.(\"${it.key}\") = ${it.value}")
+                logNav("dataProgressionLiveData(\"${it.key}\") = ${it.value}")
             }
 
             if (!list.containsValue(false)) {

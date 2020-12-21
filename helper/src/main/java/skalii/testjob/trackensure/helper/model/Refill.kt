@@ -8,6 +8,8 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
+import com.google.firebase.firestore.DocumentSnapshot
+
 import java.time.LocalDateTime
 
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -17,6 +19,7 @@ import kotlinx.serialization.Serializable
 import skalii.testjob.trackensure.helper.converter.LocalDateSerializer
 import skalii.testjob.trackensure.helper.model.base.BaseModel
 import skalii.testjob.trackensure.helper.type.FuelType
+import java.time.ZoneOffset
 
 
 @Entity(
@@ -46,6 +49,12 @@ import skalii.testjob.trackensure.helper.type.FuelType
 @ExperimentalSerializationApi
 @Serializable
 data class Refill(
+
+    @ColumnInfo(name = "id")
+    @NonNull
+    @PrimaryKey(autoGenerate = true)
+    @SerialName(value = "id")
+    override var id: Int = 0,
 
     @ColumnInfo(
         name = "date",
@@ -94,29 +103,22 @@ data class Refill(
 
 ) : BaseModel {
 
-    @ColumnInfo(name = "id")
-    @NonNull
-    @PrimaryKey(autoGenerate = true)
-    @SerialName(value = "id")
-    override var id: Int = 0
-
-
-    constructor(
-        id: Int,
-        date: LocalDateTime = LocalDateTime.now(),
-        liter: Double = 0.00,
-        cost: Double = 0.00,
-        fuelType: FuelType,
-        idGasStation: Int = 0,
-        idSupplier: Int = 0,
-        uid: String = "a0WgcHUYP7gRHQapRT8st3R5Cde2"
-    ) : this(date, liter, cost, fuelType, idGasStation, idSupplier, uid) {
-        this.id = id
-    }
+    constructor(documentSnapshot: DocumentSnapshot) : this(
+        documentSnapshot.getDouble("id")?.toInt() ?: 0,
+        LocalDateTime.ofInstant(
+            documentSnapshot.getDate("date")!!.toInstant(),
+            ZoneOffset.systemDefault()
+        ),
+        documentSnapshot.getDouble("liter") ?: 0.00,
+        documentSnapshot.getDouble("double") ?: 0.00,
+        FuelType.toEnum(documentSnapshot.getString("fuel_type") ?: ""),
+        documentSnapshot.getDouble("id_gas_station")?.toInt() ?: 0,
+        documentSnapshot.getDouble("id_supplier")?.toInt() ?: 0,
+        documentSnapshot.getString("uid") ?: "a0WgcHUYP7gRHQapRT8st3R5Cde2"
+    )
 
 
     override fun toString() =
-        """Refill(id=$id, date=$date, liter=$liter, cost=$cost, fuelType=$fuelType, 
-            |idGasStation=$idGasStation, idSupplier=$idSupplier, uid=$uid)""".trimMargin()
+        "Refill(id=$id, date=$date, liter=$liter, cost=$cost, fuelType=$fuelType, idGasStation=$idGasStation, idSupplier=$idSupplier, uid=$uid)"
 
 }

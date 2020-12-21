@@ -1,31 +1,28 @@
-package skalii.testjob.trackensure.domain.repository.base
+package skalii.testjob.trackensure.data.remote.base
 
 
 import skalii.testjob.trackensure.helper.model.base.BaseModel
 
 
-interface RepositoryRemote<Model : BaseModel> {
+interface Collection<Model : BaseModel> {
 
-    fun loadRemote(
+    fun find(
         field: String,
         value: Any?,
         runOnSuccess: (List<Model>) -> Unit,
         runOnFailure: () -> Unit
     )
 
-    fun loadRemote(
-        runOnSuccess: (List<Model>) -> Unit,
-        runOnFailure: () -> Unit
-    )
+    fun findAll(runOnSuccess: (List<Model>) -> Unit, runOnFailure: () -> Unit)
 
 
-    fun saveRemote(
+    fun add(
         model: Model,
         runOnSuccess: (Model) -> Unit,
         runOnFailure: () -> Unit
     )
 
-    fun deleteRemote(
+    fun delete(
         id: Int,
         runOnSuccess: (List<Model>) -> Unit,
         runOnFailure: () -> Unit

@@ -2,7 +2,6 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-kapt'
-//    id 'com.google.gms.google-services'
 }
 
 android {
@@ -43,12 +42,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
     implementation 'androidx.paging:paging-runtime-ktx:2.1.2'
     implementation 'com.google.android.material:material:1.2.1'
-
-    /* firebase */
-//    implementation platform("com.google.firebase:firebase-bom:$firebase_bom_version")
-//    implementation 'com.google.firebase:firebase-core'
-//    implementation 'com.google.firebase:firebase-firestore'
-//    implementation 'com.google.firebase:firebase-firestore-ktx'
 
     /* kotlin */
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

@@ -1,6 +1,7 @@
 package skalii.testjob.trackensure.domain.viewmodel.base.impl
 
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 
 import skalii.testjob.trackensure.helper.model.base.BaseModel
@@ -51,5 +52,54 @@ abstract class BaseViewModel<Model : BaseModel> :
 
     override fun removeLocal(vararg data: Model?) =
         if (!data.isNullOrEmpty()) repository.deleteAllLocal(data.filterNotNull()) else 0
+
+
+    override fun getRemote(
+        field: String,
+        value: Any?,
+        runOnSuccess: (found: List<Model>) -> Unit,
+        runOnFailure: () -> Unit
+    ) =
+        repository.loadRemote(field, value, runOnSuccess, runOnFailure)
+
+    override fun getRemote(
+        runOnSuccess: (found: List<Model>) -> Unit,
+        runOnFailure: () -> Unit
+    ) =
+        repository.loadRemote(runOnSuccess, runOnFailure)
+
+
+    override fun saveRemote(
+        model: Model,
+        runOnSuccess: (saved: Model) -> Unit,
+        runOnFailure: () -> Unit
+    ) =
+        repository.saveRemote(model, runOnSuccess, runOnFailure)
+
+    override fun removeRemote(
+        id: Int,
+        runOnSuccess: (removed: List<Model>) -> Unit,
+        runOnFailure: () -> Unit
+    ) =
+        repository.deleteRemote(id, runOnSuccess, runOnFailure)
+
+
+    open fun runSync(
+        model: Model,
+        runOnSuccess: (id: Int) -> Unit,
+        runOnFailure: () -> Unit
+    ) {
+        var id = saveLocal(model).toInt()
+        if (id == -1) id = getId(model)
+
+        val local = getFinalLocal(id)
+        Log.d("NEW_MODEL_LOCAL", local.toString())
+        saveRemote(local!!, {
+            Log.d("NEW_MODEL_REMOTE", it.toString())
+            runOnSuccess(it.id)
+        }, { runOnFailure() })
+    }
+
+    protected open var getId: (Model) -> Int = { it.id }
 
 }
