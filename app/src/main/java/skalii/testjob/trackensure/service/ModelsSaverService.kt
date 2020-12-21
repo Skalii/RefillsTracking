@@ -69,36 +69,48 @@ class ModelsSaverService : LifecycleService() {
             val geopoint = intent.getSerializableExtra("geopoint") as Pair<Double, Double>
             val supplierName = intent.getStringExtra("supplierName") ?: "Unknown supplier"
             val uid = intent.getStringExtra("uid") ?: "a0WgcHUYP7gRHQapRT8st3R5Cde2"
+            var idGasStation = 0
+            var idSupplier = 0
 
+            val connectionCheckerIntent = Intent(this, ConnectionCheckerService::class.java)
+            startService(connectionCheckerIntent)
 
-            val gasStation = GasStation(0, gasStationTitle, geopoint)
-            gasStationViewModel.runSync(gasStation, { idGasStation ->
-                gasStation.id = idGasStation
-                refreshDataProgression("gas_station", true)
-            }, { })
+            ConnectionCheckerService.getIsConnectLiveData().observe(this, {
+                Log.d("SERVICE", "ConnectionCheckerService.isConnectLiveData() = $it")
+                if (it) {
+                    stopService(connectionCheckerIntent)
 
-            val supplier = Supplier(0, supplierName)
-            supplierViewModel.runSync(supplier, { idSupplier ->
-                supplier.id = idSupplier
-                refreshDataProgression("supplier", true)
-            }, { })
+                    gasStationViewModel.runSync(GasStation(0, gasStationTitle, geopoint), { id ->
+                        idGasStation = id; refreshDataProgression("gas_station", true)
+                    }, { })
 
+                    supplierViewModel.runSync(Supplier(0, supplierName), { id ->
+                        idSupplier = id; refreshDataProgression("supplier", true)
+                    }, { })
+
+                    ConnectionCheckerService.getIsConnectLiveData().removeObservers(this)
+                }
+            })
 
             dataProgressionLiveData.observe(this, { list ->
-                list.forEach {
+                list.forEach { value ->
                     Log.d(
                         "SERVICE",
-                        "ModelsSaverService().dataProgressionLiveData(\"${it.key}\") = ${it.value}"
+                        "ModelsSaverService().dataProgressionLiveData(\"${value.key}\") = ${value.value}"
                     )
                 }
                 if (!list.containsValue(false)) stopSelf()
                 else if (list["gas_station"] == true && list["supplier"] == true) {
                     refillViewModel.runSync(
-                        Refill(0, date, liter, cost, fuelType, gasStation.id, supplier.id, uid),
+                        Refill(
+                            0, date, liter, cost, fuelType,
+                            idGasStation, idSupplier, uid
+                        ),
                         { refreshDataProgression("refill", true) },
                         { })
                 }
             })
+
         } else stopSelf()
 
         return super.onStartCommand(intent, flags, startId) //START_STICKY
