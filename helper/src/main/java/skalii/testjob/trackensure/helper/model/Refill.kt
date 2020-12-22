@@ -13,11 +13,6 @@ import com.google.firebase.firestore.DocumentSnapshot
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 
-import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-
-import skalii.testjob.trackensure.helper.converter.LocalDateSerializer
 import skalii.testjob.trackensure.helper.model.base.BaseModel
 import skalii.testjob.trackensure.helper.type.FuelType
 
@@ -46,14 +41,11 @@ import skalii.testjob.trackensure.helper.type.FuelType
         )
     ]
 )
-@ExperimentalSerializationApi
-@Serializable
 data class Refill(
 
     @ColumnInfo(name = "id")
     @NonNull
     @PrimaryKey(autoGenerate = true)
-    @SerialName(value = "id")
     override var id: Int = 0,
 
     @ColumnInfo(
@@ -61,18 +53,14 @@ data class Refill(
         defaultValue = "(datetime('now'))"
     )
     @NonNull
-    @SerialName(value = "date")
-    @Serializable(with = LocalDateSerializer::class)
     var date: LocalDateTime = LocalDateTime.now(),
 
     @ColumnInfo(name = "liter")
     @NonNull
-    @SerialName(value = "liter")
     var liter: Double = 0.00,
 
     @ColumnInfo(name = "cost")
     @NonNull
-    @SerialName(value = "cost")
     var cost: Double = 0.00,
 
     @ColumnInfo(
@@ -80,28 +68,21 @@ data class Refill(
         collate = ColumnInfo.UNICODE
     )
     @NonNull
-    @SerialName(value = "fuel_type")
     var fuelType: FuelType = FuelType.UNKNOWN,
 
     @ColumnInfo(name = "id_gas_station")
     @NonNull
-    @SerialName(value = "id_gas_station")
-//    @Transient
     var idGasStation: Int = 0,
 
     @ColumnInfo(name = "id_supplier")
     @NonNull
-    @SerialName(value = "id_supplier")
-//    @Transient
     var idSupplier: Int = 0,
 
     @ColumnInfo(name = "uid")
     @NonNull
-    @SerialName(value = "uid")
-//    @Transient
     var uid: String = "a0WgcHUYP7gRHQapRT8st3R5Cde2"
 
-) : BaseModel, java.io.Serializable {
+) : BaseModel {
 
     constructor(documentSnapshot: DocumentSnapshot) : this(
         documentSnapshot.getDouble("id")?.toInt() ?: 0,
@@ -110,7 +91,7 @@ data class Refill(
             ZoneOffset.systemDefault()
         ),
         documentSnapshot.getDouble("liter") ?: 0.00,
-        documentSnapshot.getDouble("double") ?: 0.00,
+        documentSnapshot.getDouble("cost") ?: 0.00,
         FuelType.toEnum(documentSnapshot.getString("fuel_type") ?: ""),
         documentSnapshot.getDouble("id_gas_station")?.toInt() ?: 0,
         documentSnapshot.getDouble("id_supplier")?.toInt() ?: 0,

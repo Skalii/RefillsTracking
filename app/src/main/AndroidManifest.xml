@@ -19,17 +19,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TestJobForTrackEnsure">
 
-        <activity android:name=".ui.activity.MainActivity">
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.activity.SaveRefillActivity" />
-        <activity android:name=".ui.activity.LoginActivity" />
-        <activity android:name=".ui.activity.SignupActivity" />
-        <activity android:name=".ui.activity.PasswordResetActivity" />
+        <activity
+            android:name=".ui.activity.SaveRefillActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".ui.activity.LoginActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".ui.activity.SignupActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".ui.activity.PasswordResetActivity"
+            android:configChanges="orientation|screenSize" />
 
         <service
             android:name=".service.ModelsSaverService"

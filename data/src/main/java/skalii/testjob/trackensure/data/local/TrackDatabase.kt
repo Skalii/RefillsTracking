@@ -8,8 +8,6 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
-import kotlinx.serialization.ExperimentalSerializationApi
-
 import skalii.testjob.trackensure.data.local.converter.*
 import skalii.testjob.trackensure.data.local.dao.*
 import skalii.testjob.trackensure.helper.model.*
@@ -21,7 +19,6 @@ import skalii.testjob.trackensure.helper.type.*
     version = 1,
     exportSchema = false
 )
-@ExperimentalSerializationApi
 @TypeConverters(
     LocalDateTimeConverter::class, PairDoubleDoubleConverter::class,
     FuelType::class

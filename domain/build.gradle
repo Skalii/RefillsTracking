@@ -33,6 +33,7 @@ android {
 dependencies {
 
     implementation project(path: ':data')
+    implementation project(path: ':helper')
 
     /* android */
     implementation 'androidx.appcompat:appcompat:1.2.0'
@@ -48,7 +49,6 @@ dependencies {
 
     /* room */
     implementation "androidx.room:room-runtime:$room_version"
-    implementation project(path: ':helper')
 
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

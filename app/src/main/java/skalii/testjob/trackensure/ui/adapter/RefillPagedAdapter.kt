@@ -19,7 +19,6 @@ import skalii.testjob.trackensure.ui.adapter.base.BasePagedAdapter
 import skalii.testjob.trackensure.ui.adapter.base.BaseViewHolder
 
 
-@Suppress("EXPERIMENTAL_API_USAGE")
 class RefillPagedAdapter : BasePagedAdapter<Refill>() {
 
     private val gasStations = mutableListOf<GasStation>()

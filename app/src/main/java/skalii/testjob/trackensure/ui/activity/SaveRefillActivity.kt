@@ -2,16 +2,17 @@ package skalii.testjob.trackensure.ui.activity
 
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.graphics.drawable.ColorDrawable
 import android.location.LocationManager
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 
@@ -29,6 +30,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.auth.FirebaseAuth
 
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -37,7 +39,6 @@ import java.util.Calendar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.serialization.ExperimentalSerializationApi
 
 import skalii.testjob.trackensure.R
 import skalii.testjob.trackensure.databinding.ActivitySaveRefillBinding
@@ -71,6 +72,7 @@ class SaveRefillActivity :
     private val gasStationViewModel by viewModels<GasStationViewModel>()
     private val supplierViewModel by viewModels<SupplierViewModel>()
 
+    private lateinit var mapFragment: SupportMapFragment
 
     companion object {
         private lateinit var viewModelComponent: ViewModelComponent
@@ -78,8 +80,6 @@ class SaveRefillActivity :
     }
 
 
-    @SuppressLint("RestrictedApi")
-    @ExperimentalSerializationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -107,8 +107,9 @@ class SaveRefillActivity :
         val editLiter = viewBinding.createRefill.editLiterFragmentSaveRefill
         val editCost = viewBinding.createRefill.editCostFragmentSaveRefill
         val spinnerFuelType = viewBinding.createRefill.spinnerFuelTypeFragmentSaveRefill
-        val mapFragment = (supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment)
+        mapFragment = (supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment)
             .also { it.getMapAsync(this) }
+
 
         gasStationViewModel.getLocal(true).observe(this, { gasStations ->
             editGasStation.setAdapter(ArrayAdapter(
@@ -231,6 +232,7 @@ class SaveRefillActivity :
             refill.fuelType = FuelType.toEnum(spinnerFuelType.selectedItem.toString())
             refill.idGasStation = gasStation.id
             refill.idSupplier = supplier.id
+            refill.uid = FirebaseAuth.getInstance().uid ?: "a0WgcHUYP7gRHQapRT8st3R5Cde2"
 
             startService(
                 Intent(this, ModelsSaverService::class.java).apply {
@@ -242,6 +244,13 @@ class SaveRefillActivity :
             finish()
         }
 
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+
+        mapFragment.view?.layoutParams?.height = ViewGroup.LayoutParams.MATCH_PARENT
+        /*if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) { }*/
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -256,7 +265,7 @@ class SaveRefillActivity :
                 currentGeopoint = Pair(location.latitude, location.longitude)
             }
             map.clear()
-            map.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 15F));
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 15F))
             map.addMarker(markerOptions)
         }
     }
@@ -280,14 +289,10 @@ class SaveRefillActivity :
 
 
     private fun checkPermissions() {
-        if (!isPermissionGranted(Manifest.permission.ACCESS_FINE_LOCATION)) requestPermissions(
-            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-            50
-        )
-        else if (!isPermissionGranted(Manifest.permission.ACCESS_COARSE_LOCATION)) requestPermissions(
-            arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
-            51
-        )
+        if (!isPermissionGranted(Manifest.permission.ACCESS_FINE_LOCATION))
+            requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 50)
+        else if (!isPermissionGranted(Manifest.permission.ACCESS_COARSE_LOCATION))
+            requestPermissions(arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION), 51)
         else refreshCurrentLocation(map)
     }
 

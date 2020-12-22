@@ -11,7 +11,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.serialization.ExperimentalSerializationApi
 
 import skalii.testjob.trackensure.TrackApplication.Companion.getAppComponent
 import skalii.testjob.trackensure.helper.isNetworkAvailable
@@ -27,13 +26,11 @@ class ConnectionCheckerService : LifecycleService() {
 
     override fun onCreate() {
         super.onCreate()
-        Log.d("SERVICE", "ModelsSaverService.onCreate()")
+        Log.d("SERVICE", "ConnectionCheckerService.onCreate()")
     }
 
-    @ExperimentalSerializationApi
-    @Suppress("UNREACHABLE_CODE", "UNCHECKED_CAST")
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        Log.d("SERVICE", "ModelsSaverService.onStartCommand()")
+        Log.d("SERVICE", "ConnectionCheckerService.onStartCommand()")
 
         GlobalScope.launch(Dispatchers.IO) {
             var isConnect = getAppComponent().getContext().isNetworkAvailable()
@@ -51,14 +48,14 @@ class ConnectionCheckerService : LifecycleService() {
     }
 
     override fun onDestroy() {
-        Log.d("SERVICE", "ModelsSaverService.onDestroy()")
+        Log.d("SERVICE", "ConnectionCheckerService.onDestroy()")
         isConnectLiveData.removeObservers(this)
         super.onDestroy()
     }
 
     override fun onBind(intent: Intent): IBinder {
         super.onBind(intent)
-        Log.d("SERVICE", "ModelsSaverService.onBind()")
+        Log.d("SERVICE", "ConnectionCheckerService.onBind()")
         throw UnsupportedOperationException("Not yet implemented")
     }
 

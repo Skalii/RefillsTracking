@@ -13,7 +13,6 @@ buildscript {
         gradle_version = '4.1.1'
         lifecycle_version = '2.2.0'
         kotlin_version = "1.4.21"
-        kotlin_serialization_version = "1.0.1"
         room_version = '2.2.6'
     }
     repositories {

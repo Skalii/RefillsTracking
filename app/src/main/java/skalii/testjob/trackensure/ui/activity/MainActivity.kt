@@ -6,11 +6,13 @@ import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.TypedValue
-
 import android.widget.TextView
+
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.MutableLiveData
 
 import by.kirich1409.viewbindingdelegate.viewBinding
 
@@ -21,6 +23,9 @@ import com.google.firebase.auth.FirebaseAuth.AuthStateListener
 
 import skalii.testjob.trackensure.R
 import skalii.testjob.trackensure.databinding.ActivityMainBinding
+import skalii.testjob.trackensure.domain.viewmodel.GasStationViewModel
+import skalii.testjob.trackensure.domain.viewmodel.RefillViewModel
+import skalii.testjob.trackensure.domain.viewmodel.SupplierViewModel
 import skalii.testjob.trackensure.ui.adapter.ViewPagerAdapter
 import skalii.testjob.trackensure.ui.fragment.PageRefillFragment
 import skalii.testjob.trackensure.ui.fragment.PageStatisticFragment
@@ -45,12 +50,52 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
         auth = FirebaseAuth.getInstance()
 
-        val user = FirebaseAuth.getInstance().currentUser
-
-        authListener = AuthStateListener {
-            if (it.currentUser == null) {
+        authListener = AuthStateListener { firebaseAuth ->
+            if (firebaseAuth.currentUser == null) {
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
+            } else {
+
+                if (this.intent.extras?.getBoolean("first_login") == true) {
+
+                    val gasStationViewModel by viewModels<GasStationViewModel>()
+                    gasStationViewModel.init(applicationContext)
+                    val supplierViewModel by viewModels<SupplierViewModel>()
+                    supplierViewModel.init(applicationContext)
+                    val refillViewModel by viewModels<RefillViewModel>()
+                    refillViewModel.init(applicationContext)
+
+                    val dataProgressionLiveData = MutableLiveData<MutableMap<String, Boolean>>()
+                    val dataLoadingProgressTags = mutableMapOf(
+                        "gas_stations" to false, "suppliers" to false
+                    )
+
+                    gasStationViewModel.getRemote({ gasStations ->
+                        gasStationViewModel.saveLocal(*gasStations.toTypedArray())
+                        dataProgressionLiveData
+                            .postValue(dataLoadingProgressTags.apply {
+                                this["gas_stations"] = true
+                            })
+                    }, { })
+
+                    supplierViewModel.getRemote({ suppliers ->
+                        supplierViewModel.saveLocal(*suppliers.toTypedArray())
+                        dataProgressionLiveData
+                            .postValue(dataLoadingProgressTags.apply {
+                                this["suppliers"] = true
+                            })
+                    }, { })
+
+                    dataProgressionLiveData.observe(this, { list ->
+                        if (!list.containsValue(false)) {
+                            refillViewModel.getRemote("uid", auth?.currentUser?.uid, { refills ->
+                                refillViewModel.saveLocal(*refills.toTypedArray())
+                                dataProgressionLiveData.removeObservers(this)
+                            }, { })
+                        }
+                    })
+                }
+
             }
         }
 

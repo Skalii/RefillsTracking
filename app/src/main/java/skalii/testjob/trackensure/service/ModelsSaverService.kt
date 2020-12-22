@@ -9,8 +9,6 @@ import androidx.lifecycle.MutableLiveData
 
 import javax.inject.Inject
 
-import kotlinx.serialization.ExperimentalSerializationApi
-
 import skalii.testjob.trackensure.domain.viewmodel.GasStationViewModel
 import skalii.testjob.trackensure.domain.viewmodel.RefillViewModel
 import skalii.testjob.trackensure.domain.viewmodel.SupplierViewModel
@@ -51,7 +49,6 @@ class ModelsSaverService : LifecycleService() {
         Log.d("SERVICE", "ModelsSaverService.onCreate()")
     }
 
-    @ExperimentalSerializationApi
     @Suppress("UNREACHABLE_CODE", "UNCHECKED_CAST")
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         Log.d("SERVICE", "ModelsSaverService.onStartCommand()")

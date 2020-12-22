@@ -20,7 +20,6 @@ import java.math.RoundingMode
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.plus
-import kotlinx.serialization.ExperimentalSerializationApi
 
 import skalii.testjob.trackensure.R
 import skalii.testjob.trackensure.databinding.PageStatisticBinding
@@ -33,7 +32,6 @@ import skalii.testjob.trackensure.helper.model.base.BaseModel.Companion.setData
 import skalii.testjob.trackensure.ui.fragment.base.BasePageFragment
 
 
-@ExperimentalSerializationApi
 class PageStatisticFragment : BasePageFragment(R.layout.page_statistic) {
 
     override val viewBinding by viewBinding(PageStatisticBinding::bind)
@@ -164,4 +162,5 @@ class PageStatisticFragment : BasePageFragment(R.layout.page_statistic) {
             tableLayout.dividerDrawable.alpha = 127
         }
     }
+
 }

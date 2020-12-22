@@ -16,7 +16,6 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.plus
-import kotlinx.serialization.ExperimentalSerializationApi
 
 import skalii.testjob.trackensure.R
 import skalii.testjob.trackensure.databinding.PageRefillBinding
@@ -34,7 +33,6 @@ import skalii.testjob.trackensure.ui.adapter.base.BasePagedAdapter
 import skalii.testjob.trackensure.ui.fragment.base.BasePageFragment
 
 
-@ExperimentalSerializationApi
 class PageRefillFragment : BasePageFragment(R.layout.page_refill) {
 
     override val viewBinding by viewBinding(PageRefillBinding::bind)
@@ -52,7 +50,6 @@ class PageRefillFragment : BasePageFragment(R.layout.page_refill) {
         "refills" to false, "gas_stations" to false, "suppliers" to false
     )
 
-    @Suppress("EXPERIMENTAL_API_USAGE")
     private lateinit var refills: PagedList<Refill>
 
 

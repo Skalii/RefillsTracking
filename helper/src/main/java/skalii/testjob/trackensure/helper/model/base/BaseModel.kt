@@ -3,8 +3,10 @@ package skalii.testjob.trackensure.helper.model.base
 
 import com.google.firebase.firestore.DocumentSnapshot
 
+import java.io.Serializable
 
-interface BaseModel {
+
+interface BaseModel : Serializable {
     var id: Int
 
     companion object {

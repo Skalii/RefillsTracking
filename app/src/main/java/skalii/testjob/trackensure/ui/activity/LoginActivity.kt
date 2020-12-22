@@ -50,7 +50,6 @@ class LoginActivity : AppCompatActivity(R.layout.activity_login) {
             finish()
         }
 
-        auth = FirebaseAuth.getInstance()
         viewBinding.buttonSignupActivityLogin.setOnClickListener {
             startActivity(Intent(this@LoginActivity, SignupActivity::class.java))
         }
@@ -81,7 +80,11 @@ class LoginActivity : AppCompatActivity(R.layout.activity_login) {
                             mainLaunch.launch { toast("Auth failed") }
                         }
                     } else {
-                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                        startActivity(
+                            Intent(this@LoginActivity, MainActivity::class.java).apply {
+                                putExtra("first_login", true)
+                            }
+                        )
                         finish()
                     }
                 }

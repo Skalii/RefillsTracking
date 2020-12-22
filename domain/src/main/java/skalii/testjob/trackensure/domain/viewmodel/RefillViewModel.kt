@@ -10,7 +10,6 @@ import skalii.testjob.trackensure.domain.repository.RefillRepository
 import skalii.testjob.trackensure.domain.viewmodel.base.impl.BaseViewModel
 
 
-@Suppress("EXPERIMENTAL_API_USAGE")
 class RefillViewModel : BaseViewModel<Refill>() {
 
     override lateinit var repository: RefillRepository

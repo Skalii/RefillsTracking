@@ -3,29 +3,14 @@ package skalii.testjob.trackensure.helper.type
 
 import androidx.room.TypeConverter
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 
-
-@Serializable
 enum class FuelType(val value: String) {
 
-    @SerialName("")
     EMPTY(""),
-
-    @SerialName("Unknown fuel")
     UNKNOWN("Unknown fuel"),
-
-    @SerialName("Benzine")
     BENZINE("Benzine"),
-
-    @SerialName("Diesel")
     DIESEL("Diesel"),
-
-    @SerialName("Gas")
     GAS("Gas"),
-
-    @SerialName("Kerosene")
     KEROSENE("Kerosene");
 
     companion object {

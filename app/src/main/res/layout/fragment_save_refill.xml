@@ -1,112 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
     android:id="@+id/fragment_save_refill"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="10dp">
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:fillViewport="true"
+    android:scrollbarSize="5dp"
+    android:scrollbarStyle="insideOverlay"
+    android:scrollbarThumbVertical="@color/color_content_accent_slightly_transparent"
+    android:scrollbarTrackVertical="@color/color_content_clarify_transparent"
+    android:scrollbars="vertical">
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/container_date_fragment_save_refill"
+        android:id="@+id/container_fragment_save_refill"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:padding="10dp">
 
-        <EditText
-            android:id="@+id/edit_date_fragment_save_refill"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/container_date_fragment_save_refill"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:enabled="false"
-            android:hint="20.12.2020 01:12:20"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edit_date_fragment_save_refill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:enabled="false"
+                android:hint="20.12.2020 01:12:20"
+                android:importantForAutofill="no"
+                android:inputType="datetime"
+                android:textColor="@color/color_text" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_date_time_refresh_fragment_save_refill"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="10dp"
+                android:background="@color/color_primary"
+                android:insetLeft="0dp"
+                android:insetTop="0dp"
+                android:insetRight="0dp"
+                android:insetBottom="0dp"
+                app:icon="@drawable/ic_refresh"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="45dp"
+                app:iconTint="@color/color_accent"
+                app:rippleColor="@color/color_content_accent_transparent" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <AutoCompleteTextView
+            android:id="@+id/auto_gas_station_fragment_save_refill"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Gas station"
             android:importantForAutofill="no"
-            android:inputType="datetime"
+            android:inputType="text"
             android:textColor="@color/color_text" />
 
+        <AutoCompleteTextView
+            android:id="@+id/auto_fuel_supplier_fragment_save_refill"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Fuel supplier"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:textColor="@color/color_text" />
+
+        <EditText
+            android:id="@+id/edit_liter_fragment_save_refill"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="0.00 L"
+            android:importantForAutofill="no"
+            android:inputType="numberDecimal"
+            android:textColor="@color/color_text" />
+
+        <EditText
+            android:id="@+id/edit_cost_fragment_save_refill"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="$0.00"
+            android:importantForAutofill="no"
+            android:inputType="numberDecimal"
+            android:textColor="@color/color_text" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinner_fuel_type_fragment_save_refill"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/sh_edit_text_rounded"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:textColor="@color/color_text"
+            tools:listitem="@android:layout/simple_list_item_1" />
+
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_date_time_refresh_fragment_save_refill"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="10dp"
-            android:background="@color/color_primary"
-            android:insetLeft="0dp"
-            android:insetTop="0dp"
-            android:insetRight="0dp"
-            android:insetBottom="0dp"
-            app:icon="@drawable/ic_refresh"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp"
-            app:iconSize="45dp"
-            app:iconTint="@color/color_accent"
+            android:id="@+id/button_save_fragment_save_refill"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/color_accent"
+            android:text="Save"
+            android:textColor="@color/color_primary"
             app:rippleColor="@color/color_content_accent_transparent" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <AutoCompleteTextView
-        android:id="@+id/auto_gas_station_fragment_save_refill"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:hint="Gas station"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:textColor="@color/color_text" />
-
-    <AutoCompleteTextView
-        android:id="@+id/auto_fuel_supplier_fragment_save_refill"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:hint="Fuel supplier"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:textColor="@color/color_text" />
-
-    <EditText
-        android:id="@+id/edit_liter_fragment_save_refill"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:hint="0.00 L"
-        android:importantForAutofill="no"
-        android:inputType="numberDecimal"
-        android:textColor="@color/color_text" />
-
-    <EditText
-        android:id="@+id/edit_cost_fragment_save_refill"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:hint="$0.00"
-        android:importantForAutofill="no"
-        android:inputType="numberDecimal"
-        android:textColor="@color/color_text" />
-
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/spinner_fuel_type_fragment_save_refill"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/sh_edit_text_rounded"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:textColor="@color/color_text"
-        tools:listitem="@android:layout/simple_list_item_1" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_save_fragment_save_refill"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="@color/color_accent"
-        android:text="Save"
-        android:textColor="@color/color_primary"
-        app:rippleColor="@color/color_content_accent_transparent" />
-
-</androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.core.widget.NestedScrollView>

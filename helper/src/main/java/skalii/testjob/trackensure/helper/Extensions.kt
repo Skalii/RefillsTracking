@@ -4,6 +4,7 @@ package skalii.testjob.trackensure.helper
 import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.view.Gravity
@@ -11,8 +12,8 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
 
+import androidx.core.app.ActivityCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
@@ -52,6 +53,11 @@ fun Context.toast(message: CharSequence) {
         it.show()
     }
 }
+
+val Int.PXtoDP: Int
+    get() = (this / Resources.getSystem().displayMetrics.density).toInt()
+val Int.DPtoPX: Int
+    get() = (this * Resources.getSystem().displayMetrics.density).toInt()
 
 fun RecyclerView.setVerticalDivider(divider: Int, alpha: Int = 127) {
     addItemDecoration(

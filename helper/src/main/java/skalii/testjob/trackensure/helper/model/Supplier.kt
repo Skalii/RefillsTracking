@@ -9,9 +9,6 @@ import androidx.room.PrimaryKey
 
 import com.google.firebase.firestore.DocumentSnapshot
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-
 import skalii.testjob.trackensure.helper.model.base.BaseModel
 
 
@@ -28,13 +25,11 @@ import skalii.testjob.trackensure.helper.model.base.BaseModel
             unique = true
         )]
 )
-@Serializable
 data class Supplier(
 
     @ColumnInfo(name = "id")
     @NonNull
     @PrimaryKey(autoGenerate = true)
-    @SerialName(value = "id")
     override var id: Int = 0,
 
     @ColumnInfo(
@@ -43,7 +38,6 @@ data class Supplier(
         defaultValue = "Unknown supplier"
     )
     @NonNull
-    @SerialName(value = "name")
     var name: String = "Unknown supplier"
 
 ) : BaseModel, java.io.Serializable {

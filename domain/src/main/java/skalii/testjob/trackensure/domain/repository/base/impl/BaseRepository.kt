@@ -20,7 +20,6 @@ import skalii.testjob.trackensure.domain.repository.base.RepositoryRemote
 abstract class BaseRepository<Model : BaseModel>(context: Context) :
     RepositoryLocal<Model>, RepositoryRemote<Model> {
 
-    @Suppress("EXPERIMENTAL_API_USAGE")
     protected val localDatabase = TrackDatabase.getInstance(context)
     protected abstract val dao: Dao<Model>
     protected val executor: ExecutorService = Executors.newSingleThreadExecutor()

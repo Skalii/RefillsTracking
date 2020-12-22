@@ -4,13 +4,10 @@ package skalii.testjob.trackensure.data.remote
 import java.time.ZoneOffset
 import java.util.Date
 
-import kotlinx.serialization.ExperimentalSerializationApi
-
 import skalii.testjob.trackensure.data.remote.base.impl.BaseCollection
 import skalii.testjob.trackensure.helper.model.Refill
 
 
-@ExperimentalSerializationApi
 class RefillCollection : BaseCollection<Refill>() {
 
     override val collectionName = "refills"

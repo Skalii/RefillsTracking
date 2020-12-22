@@ -77,7 +77,11 @@ class SignupActivity : AppCompatActivity(R.layout.activity_signup) {
                     if (!task.isSuccessful) {
                         mainLaunch.launch { toast("Authentication failed." + task.exception) }
                     } else {
-                        startActivity(Intent(this@SignupActivity, MainActivity::class.java))
+                        startActivity(
+                            Intent(this@SignupActivity, MainActivity::class.java).apply {
+                                putExtra("first_login", true)
+                            }
+                        )
                         finish()
                     }
                 }

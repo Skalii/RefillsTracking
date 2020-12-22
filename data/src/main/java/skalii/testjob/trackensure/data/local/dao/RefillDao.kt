@@ -8,14 +8,11 @@ import androidx.room.Query
 import androidx.room.RawQuery
 import androidx.sqlite.db.SupportSQLiteQuery
 
-import kotlinx.serialization.ExperimentalSerializationApi
-
 import skalii.testjob.trackensure.data.local.dao.base.impl.BaseDao
 import skalii.testjob.trackensure.helper.model.Refill
 
 
 @Dao
-@ExperimentalSerializationApi
 abstract class RefillDao : BaseDao<Refill>() {
 
     override val orderBy: String = "order by date desc"

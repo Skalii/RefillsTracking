@@ -10,7 +10,7 @@
     android:background="@color/color_primary">
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/scroll_page_exchange_rates"
+        android:id="@+id/scroll_page_statistic"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"

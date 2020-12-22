@@ -6,10 +6,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.google.firebase.firestore.DocumentSnapshot
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.google.firebase.firestore.DocumentSnapshot
 
 import skalii.testjob.trackensure.helper.model.base.BaseModel
 
@@ -26,13 +24,11 @@ import skalii.testjob.trackensure.helper.model.base.BaseModel
         unique = true
     )]
 )
-@Serializable
 data class GasStation(
 
     @ColumnInfo(name = "id")
     @NonNull
     @PrimaryKey(autoGenerate = true)
-    @SerialName(value = "id")
     override var id: Int = 0,
 
     @ColumnInfo(
@@ -41,7 +37,6 @@ data class GasStation(
         defaultValue = "Unknown gas station"
     )
     @NonNull
-    @SerialName(value = "title")
     var title: String = "Unknown gas station",
 
     @ColumnInfo(
@@ -50,7 +45,6 @@ data class GasStation(
         defaultValue = "Unknown geolocation",
     )
     @NonNull
-    @SerialName(value = "geopoint")
     var geopoint: Pair<Double, Double> = Pair(0.00, 0.00)
 
 ) : BaseModel, java.io.Serializable {
