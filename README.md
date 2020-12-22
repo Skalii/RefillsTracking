@@ -3,7 +3,7 @@
 [Download release APK](https://github.com/Skalii/RefillsTracking/tree/master/resources/app-release.apk "Release APK")
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Skalii/RefillsTracking/master/resources/login_1.png" alt="Viewing saved maps in memory" width="256">
+  <img src="https://raw.githubusercontent.com/Skalii/RefillsTracking/master/resources/login_1.jpg" alt="Viewing saved maps in memory" width="256">
   <img src="https://raw.githubusercontent.com/Skalii/RefillsTracking/master/resources/main_1.jpg" alt="Page with a refills on the main screen" width="256">
   <img src="https://raw.githubusercontent.com/Skalii/RefillsTracking/master/resources/main_2.jpg" alt="Statistics page on the main screen" width="256">
 </p>
