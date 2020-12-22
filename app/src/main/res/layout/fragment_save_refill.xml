@@ -4,21 +4,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
-    android:id="@+id/fragment_create_refill"
+    android:id="@+id/fragment_save_refill"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="10dp">
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/container_date_fragment_create_refill"
+        android:id="@+id/container_date_fragment_save_refill"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/edit_date_fragment_create_refill"
+            android:id="@+id/edit_date_fragment_save_refill"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -29,7 +29,7 @@
             android:textColor="@color/color_text" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_date_time_refresh_fragment_create_refill"
+            android:id="@+id/button_date_time_refresh_fragment_save_refill"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="45dp"
             android:layout_height="45dp"
@@ -48,8 +48,8 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <EditText
-        android:id="@+id/edit_gas_station_fragment_create_refill"
+    <AutoCompleteTextView
+        android:id="@+id/auto_gas_station_fragment_save_refill"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -58,8 +58,8 @@
         android:inputType="text"
         android:textColor="@color/color_text" />
 
-    <EditText
-        android:id="@+id/edit_fuel_supplier_fragment_create_refill"
+    <AutoCompleteTextView
+        android:id="@+id/auto_fuel_supplier_fragment_save_refill"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -69,7 +69,7 @@
         android:textColor="@color/color_text" />
 
     <EditText
-        android:id="@+id/edit_liter_fragment_create_refill"
+        android:id="@+id/edit_liter_fragment_save_refill"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -79,7 +79,7 @@
         android:textColor="@color/color_text" />
 
     <EditText
-        android:id="@+id/edit_cost_fragment_create_refill"
+        android:id="@+id/edit_cost_fragment_save_refill"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -89,7 +89,7 @@
         android:textColor="@color/color_text" />
 
     <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/spinner_fuel_type_fragment_create_refill"
+        android:id="@+id/spinner_fuel_type_fragment_save_refill"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -100,7 +100,7 @@
         tools:listitem="@android:layout/simple_list_item_1" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_save_fragment_create_refill"
+        android:id="@+id/button_save_fragment_save_refill"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"

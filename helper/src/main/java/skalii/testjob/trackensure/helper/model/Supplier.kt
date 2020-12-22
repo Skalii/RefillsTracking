@@ -46,7 +46,7 @@ data class Supplier(
     @SerialName(value = "name")
     var name: String = "Unknown supplier"
 
-) : BaseModel {
+) : BaseModel, java.io.Serializable {
 
     constructor(documentSnapshot: DocumentSnapshot) : this(
         documentSnapshot.getDouble("id")?.toInt() ?: 0,

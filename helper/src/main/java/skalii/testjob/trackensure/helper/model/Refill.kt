@@ -11,6 +11,7 @@ import androidx.room.PrimaryKey
 import com.google.firebase.firestore.DocumentSnapshot
 
 import java.time.LocalDateTime
+import java.time.ZoneOffset
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
@@ -19,7 +20,6 @@ import kotlinx.serialization.Serializable
 import skalii.testjob.trackensure.helper.converter.LocalDateSerializer
 import skalii.testjob.trackensure.helper.model.base.BaseModel
 import skalii.testjob.trackensure.helper.type.FuelType
-import java.time.ZoneOffset
 
 
 @Entity(
@@ -81,7 +81,7 @@ data class Refill(
     )
     @NonNull
     @SerialName(value = "fuel_type")
-    var fuelType: FuelType,
+    var fuelType: FuelType = FuelType.UNKNOWN,
 
     @ColumnInfo(name = "id_gas_station")
     @NonNull
@@ -101,7 +101,7 @@ data class Refill(
 //    @Transient
     var uid: String = "a0WgcHUYP7gRHQapRT8st3R5Cde2"
 
-) : BaseModel {
+) : BaseModel, java.io.Serializable {
 
     constructor(documentSnapshot: DocumentSnapshot) : this(
         documentSnapshot.getDouble("id")?.toInt() ?: 0,

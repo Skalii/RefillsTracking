@@ -18,11 +18,11 @@ interface RepositoryRemote<Model : BaseModel> {
         runOnFailure: () -> Unit
     )
 
-
     fun saveRemote(
         model: Model,
         runOnSuccess: (Model) -> Unit,
-        runOnFailure: () -> Unit
+        runOnFailure: () -> Unit,
+        isNew: Boolean = true
     )
 
     fun deleteRemote(

@@ -2,6 +2,7 @@ package skalii.testjob.trackensure.domain.viewmodel.base.impl
 
 
 import android.util.Log
+
 import androidx.lifecycle.ViewModel
 
 import skalii.testjob.trackensure.helper.model.base.BaseModel
@@ -19,6 +20,9 @@ abstract class BaseViewModel<Model : BaseModel> :
     override fun getModelClass() = repository.getModelClass()
     override fun getModelName() = repository.getModelName()
 
+
+    override fun checkExists(field: String, value: String) =
+        repository.checkExists(field, value)
 
     override fun getLocal(id: Int?) =
         repository.loadSingleLocal(id ?: -1)
@@ -72,9 +76,10 @@ abstract class BaseViewModel<Model : BaseModel> :
     override fun saveRemote(
         model: Model,
         runOnSuccess: (saved: Model) -> Unit,
-        runOnFailure: () -> Unit
+        runOnFailure: () -> Unit,
+        isNew: Boolean
     ) =
-        repository.saveRemote(model, runOnSuccess, runOnFailure)
+        repository.saveRemote(model, runOnSuccess, runOnFailure, isNew)
 
     override fun removeRemote(
         id: Int,
@@ -84,10 +89,11 @@ abstract class BaseViewModel<Model : BaseModel> :
         repository.deleteRemote(id, runOnSuccess, runOnFailure)
 
 
-    open fun runSync(
+    override fun runSync(
         model: Model,
         runOnSuccess: (id: Int) -> Unit,
-        runOnFailure: () -> Unit
+        runOnFailure: () -> Unit,
+        isNew: Boolean
     ) {
         var id = saveLocal(model).toInt()
         if (id == -1) id = getId(model)
@@ -97,7 +103,7 @@ abstract class BaseViewModel<Model : BaseModel> :
         saveRemote(local!!, {
             Log.d("NEW_MODEL_REMOTE", it.toString())
             runOnSuccess(it.id)
-        }, { runOnFailure() })
+        }, { runOnFailure() }, isNew)
     }
 
     protected open var getId: (Model) -> Int = { it.id }

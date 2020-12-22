@@ -43,8 +43,16 @@ abstract class BaseDao<Model : BaseModel> : Dao<Model> {
     protected abstract fun findSomeNotLiveData(query: SupportSQLiteQuery): List<Model>
 
     @RawQuery
+    protected abstract fun checkSingleNotLiveData(query: SupportSQLiteQuery): Boolean
+
+    @RawQuery
     protected abstract fun executeQuery(query: SupportSQLiteQuery): Int
 
+
+    override fun checkExists(field: String, value: String) =
+        checkSingleNotLiveData(
+            SimpleSQLiteQuery("select exists(select * from ${getTableName()} where $field = \"$value\" and id != 0);")
+        )
 
     override fun findSingle(id: Int) =
         findSingleLiveData(

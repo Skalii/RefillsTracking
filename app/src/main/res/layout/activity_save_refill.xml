@@ -4,11 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
-    android:id="@+id/activity_create_refill"
+    android:id="@+id/activity_save_refill"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.activity.CreateRefillActivity">
+    tools:context=".ui.activity.SaveRefillActivity">
 
     <include
         android:id="@+id/map"
@@ -19,7 +19,7 @@
 
     <include
         android:id="@+id/create_refill"
-        layout="@layout/fragment_create_refill"
+        layout="@layout/fragment_save_refill"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.5" />

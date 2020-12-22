@@ -22,13 +22,21 @@ interface ViewModelRemote<Model : BaseModel> {
     fun saveRemote(
         model: Model,
         runOnSuccess: (saved: Model) -> Unit,
-        runOnFailure: () -> Unit
+        runOnFailure: () -> Unit,
+        isNew: Boolean
     )
 
     fun removeRemote(
         id: Int,
         runOnSuccess: (removed: List<Model>) -> Unit,
         runOnFailure: () -> Unit
+    )
+
+    fun runSync(
+        model: Model,
+        runOnSuccess: (id: Int) -> Unit,
+        runOnFailure: () -> Unit,
+        isNew: Boolean
     )
 
 }

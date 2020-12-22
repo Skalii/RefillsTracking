@@ -53,7 +53,7 @@ data class GasStation(
     @SerialName(value = "geopoint")
     var geopoint: Pair<Double, Double> = Pair(0.00, 0.00)
 
-) : BaseModel {
+) : BaseModel, java.io.Serializable {
 
     constructor(documentSnapshot: DocumentSnapshot) : this(
         documentSnapshot.getDouble("id")?.toInt() ?: 0,

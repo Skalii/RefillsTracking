@@ -1,6 +1,8 @@
 package skalii.testjob.trackensure.ui.adapter
 
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +14,7 @@ import skalii.testjob.trackensure.helper.model.GasStation
 import skalii.testjob.trackensure.helper.model.Refill
 import skalii.testjob.trackensure.helper.model.Supplier
 import skalii.testjob.trackensure.helper.model.base.BaseModel.Companion.findById
+import skalii.testjob.trackensure.ui.activity.SaveRefillActivity
 import skalii.testjob.trackensure.ui.adapter.base.BasePagedAdapter
 import skalii.testjob.trackensure.ui.adapter.base.BaseViewHolder
 
@@ -65,6 +68,7 @@ class RefillPagedAdapter : BasePagedAdapter<Refill>() {
         private val textLiter = viewBinding.textLiterItemRefill
         private val textCost = viewBinding.textCostItemRefill
 
+        @SuppressLint("SetTextI18n")
         fun bind(
             refill: Refill,
             gasStation: GasStation?,
@@ -78,7 +82,13 @@ class RefillPagedAdapter : BasePagedAdapter<Refill>() {
             textCost.text = "$${refill.cost}"
 
             card.setOnClickListener {
-                //todo open refill for update
+                it.context.startActivity(
+                    Intent(it.context, SaveRefillActivity::class.java).apply {
+                        putExtra("gas_station", gasStation)
+                        putExtra("supplier", supplier)
+                        putExtra("refill", refill)
+                    }
+                )
             }
         }
 

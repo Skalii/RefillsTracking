@@ -15,7 +15,7 @@ class GasStationRepository(context: Context) : BaseRepository<GasStation>(contex
     override val remoteDatabase = GasStationCollection()
 
 
-    fun loadSomeFinalLocal(title: String, geopoint: Pair<Double, Double>) =
-        dao.findSomeFinal(title, geopoint)
+    fun loadSingleFinalLocal(title: String) =
+        dao.findSingleFinal(title)
 
 }

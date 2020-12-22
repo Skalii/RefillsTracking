@@ -9,20 +9,10 @@ class SupplierCollection : BaseCollection<Supplier>() {
 
     override val collectionName = "suppliers"
     override fun getModelClass() = Supplier::class.java
-
-    override fun add(
-        model: Supplier,
-        runOnSuccess: (Supplier) -> Unit,
-        runOnFailure: () -> Unit
-    ) {
-        getCollection().add(
-            hashMapOf(
-                "id" to model.id,
-                "name" to model.name
-            )
-        ).addOnSuccessListener { reference ->
-            reference.get().addOnSuccessListener(onSuccessListenerSingle { runOnSuccess(it) })
-        }.addOnFailureListener(onFailureListener { runOnFailure() })
-    }
+    override fun getModelHashMap(model: Supplier): HashMap<String, Any> =
+        hashMapOf(
+            "id" to model.id,
+            "name" to model.name
+        )
 
 }

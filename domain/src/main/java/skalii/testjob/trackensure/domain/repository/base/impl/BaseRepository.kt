@@ -38,6 +38,9 @@ abstract class BaseRepository<Model : BaseModel>(context: Context) :
     override fun getTableName() = dao.getTableName()
 
 
+    override fun checkExists(field: String, value: String) =
+        dao.checkExists(field, value)
+
     @Suppress("UNCHECKED_CAST")
     override fun loadSingleLocal(id: Int) =
         loadAnyDataFromLocal { dao.findSingle(id) } as LiveData<Model?>
@@ -93,9 +96,11 @@ abstract class BaseRepository<Model : BaseModel>(context: Context) :
     override fun saveRemote(
         model: Model,
         runOnSuccess: (Model) -> Unit,
-        runOnFailure: () -> Unit
+        runOnFailure: () -> Unit,
+        isNew: Boolean
     ) =
-        remoteDatabase.add(model, runOnSuccess, runOnFailure)
+        if (isNew) remoteDatabase.add(model, runOnSuccess, runOnFailure)
+        else remoteDatabase.set(model, runOnSuccess, runOnFailure)
 
     override fun deleteRemote(
         id: Int,

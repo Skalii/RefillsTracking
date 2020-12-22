@@ -12,6 +12,8 @@ interface RepositoryLocal<Model : BaseModel> {
     fun getModelName(): String
     fun getTableName(): String
 
+    fun checkExists(field: String, value: String): Boolean
+
     fun loadSingleLocal(id: Int): LiveData<Model?>
     fun loadSingleFinalLocal(id: Int): Model?
     fun loadFewLocal(ids: List<Int>): LiveData<List<Model>>

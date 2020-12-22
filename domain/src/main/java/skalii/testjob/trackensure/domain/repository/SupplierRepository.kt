@@ -15,7 +15,7 @@ class SupplierRepository(context: Context) : BaseRepository<Supplier>(context) {
     override val remoteDatabase = SupplierCollection()
 
 
-    fun loadSomeFinalLocal(name: String) =
-        dao.findSomeFinal(name)
+    fun loadSingleFinalLocal(name: String) =
+        dao.findSingleFinal(name)
 
 }

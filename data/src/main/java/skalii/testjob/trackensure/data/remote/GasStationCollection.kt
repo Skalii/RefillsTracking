@@ -11,21 +11,10 @@ class GasStationCollection : BaseCollection<GasStation>() {
 
     override val collectionName = "gas_stations"
     override fun getModelClass() = GasStation::class.java
-
-    override fun add(
-        model: GasStation,
-        runOnSuccess: (GasStation) -> Unit,
-        runOnFailure: () -> Unit
-    ) {
-        getCollection().add(
-            hashMapOf(
-                "id" to model.id,
-                "title" to model.title,
-                "geopoint" to GeoPoint(model.geopoint.first, model.geopoint.second)
-            )
-        ).addOnSuccessListener { reference ->
-            reference.get().addOnSuccessListener(onSuccessListenerSingle { runOnSuccess(it) })
-        }.addOnFailureListener(onFailureListener { runOnFailure() })
-    }
+    override fun getModelHashMap(model: GasStation): HashMap<String, Any> = hashMapOf(
+        "id" to model.id,
+        "title" to model.title,
+        "geopoint" to GeoPoint(model.geopoint.first, model.geopoint.second)
+    )
 
 }

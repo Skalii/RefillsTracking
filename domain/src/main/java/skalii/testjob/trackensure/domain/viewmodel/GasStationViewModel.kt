@@ -18,10 +18,10 @@ class GasStationViewModel : BaseViewModel<GasStation>() {
     }
 
 
-    fun getFinalLocal(title: String, geopoint: Pair<Double, Double>) =
-        repository.loadSomeFinalLocal(title, geopoint)
+    fun getFinalLocal(title: String) =
+        repository.loadSingleFinalLocal(title)
 
 
-    override var getId: (GasStation) -> Int = { getFinalLocal(it.title, it.geopoint)[0].id }
+    override var getId: (GasStation) -> Int = { getFinalLocal(it.title)?.id ?: super.getId(it) }
 
 }

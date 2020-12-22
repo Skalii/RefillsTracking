@@ -7,8 +7,6 @@ import android.util.Log
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.MutableLiveData
 
-import java.time.LocalDateTime
-
 import javax.inject.Inject
 
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -19,8 +17,7 @@ import skalii.testjob.trackensure.domain.viewmodel.SupplierViewModel
 import skalii.testjob.trackensure.helper.model.GasStation
 import skalii.testjob.trackensure.helper.model.Refill
 import skalii.testjob.trackensure.helper.model.Supplier
-import skalii.testjob.trackensure.helper.type.FuelType
-import skalii.testjob.trackensure.ui.activity.CreateRefillActivity
+import skalii.testjob.trackensure.ui.activity.SaveRefillActivity
 
 
 class ModelsSaverService : LifecycleService() {
@@ -45,7 +42,7 @@ class ModelsSaverService : LifecycleService() {
 
 
     init {
-        CreateRefillActivity.getViewModelComponent().injectService(this)
+        SaveRefillActivity.getViewModelComponent().injectService(this)
     }
 
 
@@ -61,16 +58,10 @@ class ModelsSaverService : LifecycleService() {
 
         if (intent != null) {
 
-            val date = intent.getSerializableExtra("date") as LocalDateTime
-            val liter = intent.getDoubleExtra("liter", 0.00)
-            val cost = intent.getDoubleExtra("cost", 0.00)
-            val fuelType = intent.getSerializableExtra("fuelType") as FuelType
-            val gasStationTitle = intent.getStringExtra("gasStationTitle") ?: "Unknown gas station"
-            val geopoint = intent.getSerializableExtra("geopoint") as Pair<Double, Double>
-            val supplierName = intent.getStringExtra("supplierName") ?: "Unknown supplier"
-            val uid = intent.getStringExtra("uid") ?: "a0WgcHUYP7gRHQapRT8st3R5Cde2"
-            var idGasStation = 0
-            var idSupplier = 0
+            val gasStation =
+                intent.getSerializableExtra("gas_station") as GasStation? ?: GasStation()
+            val supplier = intent.getSerializableExtra("supplier") as Supplier? ?: Supplier()
+            val refill = intent.getSerializableExtra("refill") as Refill? ?: Refill()
 
             val connectionCheckerIntent = Intent(this, ConnectionCheckerService::class.java)
             startService(connectionCheckerIntent)
@@ -80,13 +71,15 @@ class ModelsSaverService : LifecycleService() {
                 if (it) {
                     stopService(connectionCheckerIntent)
 
-                    gasStationViewModel.runSync(GasStation(0, gasStationTitle, geopoint), { id ->
-                        idGasStation = id; refreshDataProgression("gas_station", true)
-                    }, { })
+                    gasStationViewModel.runSync(gasStation, { id ->
+                        refill.idGasStation = id
+                        refreshDataProgression("gas_station", true)
+                    }, { }, gasStation.id == 0)
 
-                    supplierViewModel.runSync(Supplier(0, supplierName), { id ->
-                        idSupplier = id; refreshDataProgression("supplier", true)
-                    }, { })
+                    supplierViewModel.runSync(supplier, { id ->
+                        refill.idSupplier = id
+                        refreshDataProgression("supplier", true)
+                    }, { }, supplier.id == 0)
 
                     ConnectionCheckerService.getIsConnectLiveData().removeObservers(this)
                 }
@@ -101,13 +94,9 @@ class ModelsSaverService : LifecycleService() {
                 }
                 if (!list.containsValue(false)) stopSelf()
                 else if (list["gas_station"] == true && list["supplier"] == true) {
-                    refillViewModel.runSync(
-                        Refill(
-                            0, date, liter, cost, fuelType,
-                            idGasStation, idSupplier, uid
-                        ),
-                        { refreshDataProgression("refill", true) },
-                        { })
+                    refillViewModel.runSync(refill, {
+                        refreshDataProgression("refill", true)
+                    }, { }, refill.id == 0)
                 }
             })
 

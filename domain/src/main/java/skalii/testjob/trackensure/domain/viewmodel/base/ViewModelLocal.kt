@@ -11,6 +11,8 @@ interface ViewModelLocal<Model : BaseModel> {
     fun getModelClass(): Class<*>
     fun getModelName(): String
 
+    fun checkExists(field: String, value: String): Boolean
+
     fun getLocal(id: Int?): LiveData<Model?>
     fun getFinalLocal(id: Int?): Model?
 

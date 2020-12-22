@@ -30,10 +30,9 @@ abstract class GasStationDao : BaseDao<GasStation>() {
            select *
            from gas_stations
            where title = :title
-             and geolocation = :geopoint
            order by title, geolocation;
            """
     )
-    abstract fun findSomeFinal(title: String, geopoint: Pair<Double, Double>): List<GasStation>
+    abstract fun findSingleFinal(title: String): GasStation?
 
 }

@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.activity.CreateRefillActivity" />
+        <activity android:name=".ui.activity.SaveRefillActivity" />
         <activity android:name=".ui.activity.LoginActivity" />
         <activity android:name=".ui.activity.SignupActivity" />
         <activity android:name=".ui.activity.PasswordResetActivity" />

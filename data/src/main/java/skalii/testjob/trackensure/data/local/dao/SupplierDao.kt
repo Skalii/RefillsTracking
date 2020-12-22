@@ -32,6 +32,6 @@ abstract class SupplierDao : BaseDao<Supplier>() {
            order by name;
            """
     )
-    abstract fun findSomeFinal(name: String): List<Supplier>
+    abstract fun findSingleFinal(name: String): Supplier?
 
 }

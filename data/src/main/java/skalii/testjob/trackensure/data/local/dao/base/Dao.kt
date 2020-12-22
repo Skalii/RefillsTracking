@@ -12,6 +12,8 @@ interface Dao<Model : BaseModel> {
     fun getModelName(): String
     fun getTableName(): String
 
+    fun checkExists(field: String, value: String): Boolean
+
     fun findSingle(id: Int): LiveData<Model?>
     fun findSingleFinal(id: Int): Model?
     fun findFew(ids: List<Int>): LiveData<List<Model>>
