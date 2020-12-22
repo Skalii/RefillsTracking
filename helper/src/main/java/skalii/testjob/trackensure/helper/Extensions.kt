@@ -16,15 +16,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
-import java.io.IOException
 import java.time.format.DateTimeFormatter
-
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 
 fun Activity.isPermissionGranted(permission: String) =
@@ -69,56 +62,6 @@ fun RecyclerView.setVerticalDivider(divider: Int, alpha: Int = 127) {
             }
         }
     )
-}
-
-fun SwipeRefreshLayout.swipeToRefresh(
-    coroutineScope: CoroutineScope? = null,
-    onRefresh: () -> Unit
-) {
-    var swipeCount = 1
-    var now: Long? = null
-
-    setOnRefreshListener {
-        when {
-
-            !context.isNetworkAvailable() -> {
-                context.toast("Відсутнє з'єднання з мережею")
-                isRefreshing = false
-            }
-
-            swipeCount >= 5 -> {
-                if (swipeCount == 5) {
-                    now = System.nanoTime()
-                } else {
-                    if (System.nanoTime() - now!! >= 120000000000) {
-                        swipeCount = 1
-                        now = null
-                    }
-                }
-                context.toast("Ви занадто часто відправляєте запити\nСпробуйте трохи пізніше")
-                swipeCount++
-                isRefreshing = false
-            }
-
-            else -> {
-                var isConnected: Boolean
-                var errorMessage: String? = null
-                GlobalScope.launch(Dispatchers.IO) {
-                    isConnected = try {
-                        onRefresh.invoke()
-                        true
-                    } catch (e: IOException) {
-                        errorMessage = e.message
-                        false
-                    }
-                    if (isConnected) swipeCount++
-                    coroutineScope?.launch { context.toast(errorMessage ?: "Дані оновлено") }
-                    isRefreshing = false
-                }
-            }
-
-        }
-    }
 }
 
 fun View.setVisibility(condition: Boolean) {

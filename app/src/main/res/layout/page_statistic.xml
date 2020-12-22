@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
@@ -9,4 +9,68 @@
     android:layout_height="match_parent"
     android:background="@color/color_primary">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_page_exchange_rates"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:clipToPadding="false"
+        android:paddingTop="10dp"
+        android:paddingBottom="90dp"
+        android:scrollbarSize="5dp"
+        android:scrollbarStyle="insideOverlay"
+        android:scrollbarThumbVertical="@color/color_content_accent_slightly_transparent"
+        android:scrollbarTrackVertical="@color/color_content_clarify_transparent"
+        android:scrollbars="vertical">
+
+        <TableLayout
+            android:id="@+id/table_page_statistic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:divider="@drawable/sh_divider_accent"
+            android:dividerPadding="10dp"
+            android:showDividers="beginning|middle|end">
+
+            <TableRow
+                android:id="@+id/row_titles_page_statistic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:weightSum="3">
+
+                <TextView
+                    android:id="@+id/col_title_page_statistic"
+                    style="@style/Text.Row.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Gas station"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/col_first_value_page_statistic"
+                    style="@style/Text.Row.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Visits"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/col_second_value_page_statistic"
+                    style="@style/Text.Row.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Liters"
+                    android:textAlignment="center" />
+
+            </TableRow>
+
+        </TableLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</FrameLayout>

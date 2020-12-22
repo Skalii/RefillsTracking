@@ -1,47 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
     android:id="@+id/page_refill"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_primary">
-
-    <!--  todo appbar  -->
+    android:background="@color/color_primary"
+    android:orientation="vertical">
 
     <ProgressBar
         android:id="@+id/progress_init_page_refill"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_gravity="center_horizontal|top"
+        android:layout_gravity="center_horizontal"
         android:indeterminate="true"
         android:indeterminateTint="@color/color_primary_dark"
         android:indeterminateTintMode="src_atop" />
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_page_refill"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_refills_page_refill"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:paddingTop="10dp"
+        android:paddingBottom="90dp"
+        android:scrollbarSize="5dp"
+        android:scrollbarStyle="insideOverlay"
+        android:scrollbarThumbVertical="@color/color_content_accent_slightly_transparent"
+        android:scrollbarTrackVertical="@color/color_content_clarify_transparent"
+        android:scrollbars="vertical"
+        tools:itemCount="15"
+        tools:layoutManager="LinearLayoutManager"
+        tools:listitem="@layout/item_refill" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_refills_page_refill"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:paddingTop="10dp"
-            android:paddingBottom="90dp"
-            android:scrollbarSize="5dp"
-            android:scrollbarStyle="insideOverlay"
-            android:scrollbarThumbVertical="@color/color_content_accent_slightly_transparent"
-            android:scrollbarTrackVertical="@color/color_content_clarify_transparent"
-            android:scrollbars="vertical"
-            tools:itemCount="15"
-            tools:layoutManager="LinearLayoutManager"
-            tools:listitem="@layout/item_refill" />
-
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

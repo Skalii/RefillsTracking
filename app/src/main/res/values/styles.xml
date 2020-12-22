@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="Text">
         <item name="android:letterSpacing">0.03125</item>
@@ -9,6 +9,10 @@
         <item name="android:textColor">@color/color_text</item>
         <item name="android:textSize">15sp</item>
         <item name="fontFamily">@font/open_sans_regular</item>
+    </style>
+
+    <style name="Text.SemiBold" parent="Text">
+        <item name="fontFamily">@font/open_sans_semibold</item>
     </style>
 
     <style name="Text.Bold" parent="Text">
@@ -24,23 +28,15 @@
     </style>
 
     <style name="Text.Item" parent="Text">
-        <item name="autoSizeMinTextSize">12sp</item>
-        <item name="autoSizeMaxTextSize">14sp</item>
-        <item name="autoSizeStepGranularity">0.5sp</item>
-        <item name="autoSizeTextType">uniform</item>
         <item name="android:textSize">14sp</item>
         <item name="android:ellipsize">marquee</item>
         <item name="android:lines">1</item>
     </style>
 
     <style name="Text.Item.Title" parent="Text.Bold">
-        <item name="autoSizeMinTextSize">12sp</item>
-        <item name="autoSizeMaxTextSize">15sp</item>
-        <item name="autoSizeStepGranularity">0.5sp</item>
-        <item name="autoSizeTextType">uniform</item>
         <item name="android:ellipsize">marquee</item>
         <item name="android:lines">1</item>
-        <item name="android:textColor">@color/color_content_accent</item>
+        <item name="android:textColor">@color/color_accent</item>
     </style>
 
     <style name="Text.Tab" parent="Text.Bold">
@@ -51,5 +47,10 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="Text.Row.Title" parent="Text.SemiBold">
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/color_content_accent</item>
+    </style>
 
 </resources>

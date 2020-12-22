@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/table_row_statistic"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/ripple_row"
+    android:clickable="true"
+    android:focusable="true"
+    android:padding="10dp"
+    android:weightSum="3">
+
+    <TextView
+        android:id="@+id/col_title_statistic"
+        style="@style/Text.Item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|end"
+        android:layout_weight="1"
+        android:text="Gas station"
+        tools:ignore="RtlCompat" />
+
+    <TextView
+        android:id="@+id/col_first_value_statistic"
+        style="@style/Text.Item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|end"
+        android:layout_weight="1"
+        android:text="Visits"
+        tools:ignore="RtlCompat" />
+
+    <TextView
+        android:id="@+id/col_second_value_statistic"
+        style="@style/Text.Item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|end"
+        android:layout_weight="1"
+        android:text="Liters"
+        tools:ignore="RtlCompat" />
+
+</TableRow>

@@ -4,8 +4,8 @@ package skalii.testjob.trackensure.ui.fragment
 import android.os.Bundle
 import android.view.View
 
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModelProvider
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
@@ -29,7 +29,6 @@ import skalii.testjob.trackensure.helper.setVisibility
 import skalii.testjob.trackensure.helper.model.Refill
 import skalii.testjob.trackensure.helper.model.Supplier
 import skalii.testjob.trackensure.helper.model.base.BaseModel
-import skalii.testjob.trackensure.helper.swipeToRefresh
 import skalii.testjob.trackensure.ui.adapter.RefillPagedAdapter
 import skalii.testjob.trackensure.ui.adapter.base.BasePagedAdapter
 import skalii.testjob.trackensure.ui.fragment.base.BasePageFragment
@@ -41,9 +40,9 @@ class PageRefillFragment : BasePageFragment(R.layout.page_refill) {
     override val viewBinding by viewBinding(PageRefillBinding::bind)
     override val mainLaunch = MainScope() + CoroutineName(this.javaClass.simpleName)
 
-    private lateinit var refillViewModel: RefillViewModel
-    private lateinit var gasStationViewModel: GasStationViewModel
-    private lateinit var supplierViewModel: SupplierViewModel
+    private val refillViewModel by viewModels<RefillViewModel>()
+    private val gasStationViewModel by viewModels<GasStationViewModel>()
+    private val supplierViewModel by viewModels<SupplierViewModel>()
 
     private val refillsLiveData = MutableLiveData<PagedList<Refill>>()
     private val gasStationLiveData = MutableLiveData<List<GasStation>>()
@@ -72,11 +71,8 @@ class PageRefillFragment : BasePageFragment(R.layout.page_refill) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        refillViewModel = ViewModelProvider(this)[RefillViewModel::class.java]
         refillViewModel.init(requireContext())
-        gasStationViewModel = ViewModelProvider(this)[GasStationViewModel::class.java]
         gasStationViewModel.init(requireContext())
-        supplierViewModel = ViewModelProvider(this)[SupplierViewModel::class.java]
         supplierViewModel.init(requireContext())
     }
 
@@ -138,7 +134,6 @@ class PageRefillFragment : BasePageFragment(R.layout.page_refill) {
             if (!list.containsValue(false)) {
 
                 viewBinding.progressInitPageRefill.setVisibility(false)
-                viewBinding.swipePageRefill.swipeToRefresh(mainLaunch) {}
                 recyclerRefills.setVisibility(isNotEmptyRefills)
                 if (isNotEmptyRefills) refillAdapter.submitList(refills)
                 else refillAdapter.clearData()
